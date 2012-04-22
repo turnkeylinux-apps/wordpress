@@ -41,6 +41,11 @@ define('WP_HOME', 'http://'.\$_SERVER['HTTP_HOST']);
 // WordPress Localized Language, defaults to English.
 define ('WPLANG', '');
 
+// WordPress debugging mode (for developers).
+define('WP_DEBUG', false);
+
+/* That's all, stop editing! Happy blogging. */
+
 if ( !defined('ABSPATH') )
         define('ABSPATH', dirname(__FILE__) . '/');
 
