@@ -1,0 +1,111 @@
+#!/bin/bash -ex
+
+WPROOT=/var/www/wordpress
+CONFIG_FILE=$WPROOT/wp-config.php
+NAME=wordpress
+DB_PREFIX=wp_
+DB_PASSWORD=$(mcookie)
+
+ADMIN_USER=admin
+ADMIN_PASS=turnkey
+ADMIN_MAIL=admin@example.com
+
+# unpack wordpress
+tar -zxf /usr/local/src/wordpress*.tar.gz -C $(dirname $WPROOT)
+rm /usr/local/src/wordpress*
+
+# write the config file
+cat > $CONFIG_FILE << EOF
+<?php
+define('DB_NAME', '$NAME');
+define('DB_USER', '$NAME');
+define('DB_PASSWORD', '$DB_PASSWORD');
+define('DB_HOST', 'localhost');
+define('DB_CHARSET', 'utf8');
+define('DB_COLLATE', '');
+
+define('AUTH_KEY', '$(mcookie)$(mcookie)');
+define('AUTH_SALT', '$(mcookie)$(mcookie)');
+define('SECURE_AUTH_KEY', '$(mcookie)$(mcookie)');
+define('SECURE_AUTH_SALT', '$(mcookie)$(mcookie)');
+define('LOGGED_IN_KEY', '$(mcookie)$(mcookie)');
+define('LOGGED_IN_SALT', '$(mcookie)$(mcookie)');
+define('NONCE_KEY', '$(mcookie)$(mcookie)');
+define('NONCE_SALT', '$(mcookie)$(mcookie)');
+
+\$table_prefix  = '$DB_PREFIX';
+
+define('WP_SITEURL', 'http://'.\$_SERVER['HTTP_HOST']);
+define('WP_HOME', 'http://'.\$_SERVER['HTTP_HOST']);
+
+// WordPress Localized Language, defaults to English.
+define ('WPLANG', '');
+
+if ( !defined('ABSPATH') )
+        define('ABSPATH', dirname(__FILE__) . '/');
+
+require_once(ABSPATH . 'wp-settings.php');
+EOF
+
+chgrp www-data "${CONFIG_FILE}"
+
+# start mysql server
+/etc/init.d/mysql start
+
+# create the database and user
+mysql --defaults-extra-file=/etc/mysql/debian.cnf <<EOF
+CREATE DATABASE $NAME;
+GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,ALTER
+ON $NAME.*
+TO $NAME@localhost
+IDENTIFIED BY '$DB_PASSWORD';
+FLUSH PRIVILEGES;
+EOF
+
+# setup apache configuration and complete wordpress installation
+a2dissite default
+a2ensite wordpress
+a2enmod rewrite
+/etc/init.d/apache2 start
+
+cat >$WPROOT/wp-admin/turnkey-install.php<<EOF
+<?php
+define('WP_INSTALLING', true);
+require_once('../wp-config.php');
+require_once('./includes/upgrade.php');
+
+//install system
+wp_install("TurnKey Linux", '$ADMIN_USER', '$ADMIN_MAIL', 1);
+
+//set admin password to something not random
+\$user = get_userdatabylogin('$ADMIN_USER');
+\$user = add_magic_quotes(get_object_vars(\$user));
+\$user['user_pass'] = '$ADMIN_PASS';
+wp_update_user(\$user);
+?>
+EOF
+
+curl http://127.0.0.1/wp-admin/turnkey-install.php >/dev/null
+rm $WPROOT/wp-admin/turnkey-install.php
+
+/etc/init.d/apache2 stop
+
+# edit first post to include useful information
+mysql --defaults-extra-file=/etc/mysql/debian.cnf <<EOF
+USE $NAME;
+UPDATE ${DB_PREFIX}posts SET post_title = 'Welcome to WordPress!'
+WHERE ID = '1';
+UPDATE ${DB_PREFIX}posts SET post_content = 'Getting started...<ul><li><a href="/wp-login.php">Login</a> as <b>admin</b> and get blogging!</li><li>Refer to the <a href="http://www.turnkeylinux.org/wordpress">TurnKey WordPress release notes</a></li><li>Refer to the <a href="http://codex.wordpress.org/Getting_Started_with_WordPress">Wordpress Getting Started Codex</a></li></ul>'
+WHERE ID = '1';
+EOF
+
+# unpack and configure plugins
+PLUGINS_SRC="/usr/local/src/wp-plugins"
+PLUGINS_DST="/var/www/wordpress/wp-content/plugins"
+for plugin in $(ls $PLUGINS_SRC/*.zip); do unzip -o $plugin -d $PLUGINS_DST; done
+chown -R www-data:www-data $PLUGINS_DST
+rm -rf $PLUGINS_SRC
+
+# stop mysql server
+/etc/init.d/mysql stop
+

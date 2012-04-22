@@ -1,0 +1,8 @@
+#!/bin/bash -e
+# set wordpress admin password and email
+
+. /etc/default/inithooks
+
+[ -e $INITHOOKS_CONF ] && . $INITHOOKS_CONF
+$INITHOOKS_PATH/bin/wordpress.py --pass="$APP_PASS" --email="$APP_EMAIL"
+

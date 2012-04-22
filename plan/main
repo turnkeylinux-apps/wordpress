@@ -1,0 +1,15 @@
+#include <turnkey/base>
+#include <turnkey/lamp>
+
+libjs-cropper       /* wordpress dep */
+libjs-jquery        /* wordpress dep */
+libjs-prototype     /* wordpress dep */
+libjs-scriptaculous /* wordpress dep */
+libphp-phpmailer    /* wordpress dep */
+libphp-snoopy       /* wordpress dep */
+php-gettext         /* wordpress dep */
+php5-gd             /* wordpress dep */
+tinymce             /* wordpress dep */
+
+unzip               /* most wordpress plugins and themes are zip archives */
+curl                /* used by conf.d and useful to download plugins/themes */

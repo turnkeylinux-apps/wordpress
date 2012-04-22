@@ -1,0 +1,141 @@
+turnkey-wordpress-11.1 (1) turnkey; urgency=low
+
+  * WordPress:
+
+    - Added random salts (security).
+    - Upgraded all plugins to latest versions.
+    - Removed cforms plugin (licensing issues).
+
+  * Set Wordpress admin email and password on firstboot (convenience, security).
+
+  * Set MySQL root password on firstboot (convenience, security).
+
+  * Force MySQL to use Unicode/UTF8.
+
+  * Added php-xcache PHP opcode cacher / optimizer (performance).
+
+  * Set postfix MTA myhostname to localhost (bugfix).
+
+  * Enabled tracking in PHPMyAdmin.
+
+  * Major component versions:
+
+    wordpress       3.0.3 (upstream tarball)
+    mysql-server    5.1.41-3ubuntu12.8
+    apache2         2.2.14-5ubuntu8.4
+    phpmyadmin      4:3.3.2-1
+
+  * Note: Please refer to turnkey-core's changelog for changes common to all
+    appliances. Here we only describe changes specific to this appliance.
+
+ -- Alon Swartz <alon@turnkeylinux.org>  Sun, 19 Dec 2010 15:01:05 +0200
+
+turnkey-wordpress-2009.10 (2) hardy; urgency=low
+
+  * Installed all security updates (see manifest for package versions).
+
+  * Install security updates on firstboot (except when running live).
+
+  * Trick webmin into not checking for upgrades (managed by apt).
+
+  * Updated di-live mysql mechanism and secret regeneration.
+
+  * Included latest version of inithooks and updated scripts.
+
+  * Included wget as per common request.
+
+ -- Alon Swartz <alon@turnkeylinux.org>  Mon, 29 Mar 2010 09:02:11 +0200
+
+turnkey-wordpress-2009.10 (1) hardy; urgency=low
+
+  * Upgraded to Wordpress 2.8.4
+
+    - Using upstream tarball instead of deb package as it now includes an
+      integrated upgrade mechanism.
+
+  * added useful/popular wordpress plugins:
+    
+    - All in One SEO Pack
+    - Google XML Sitemaps
+    - NextGEN Gallery
+    - WordPress.com Stats
+    - WP Super Cache
+    - Contact Form 7
+    - Sociable
+    - Viper's Video Quicktags
+    - Simple Tags
+    - WP-DB-Backup
+    - Google Analytics for WordPress
+    - WP-Polls
+    - podPress
+    - WP-PageNavi
+    - OZH admin dropdown menu
+    - Cforms
+    - MaxBlogPress ping optimizer
+
+  * PHPMyAdmin improvements:
+
+    - Added pmadb (linked tables) advanced features to PHPMyAdmin (LP#426303).
+    - Pinned PHPMyAdmin to update directly from Debian (security).
+
+  * di-live (installer) MySQL component
+
+    - Added support for complex passwords (LP#416515).
+    - Added CLI options (user/pass/query/chroot).
+
+  * Bugfix: Removed build systems hostname from MySQL user table.
+
+  * Regenerates all secrets during installation / firstboot (security).
+
+  * Major component versions:
+
+    wordpress       2.8.4 (upstream tarball)
+    mysql-server    5.0.51a-3ubuntu5.4
+    apache2         2.2.8-1ubuntu0.11
+    phpmyadmin      2.11.8.1-5+lenny1
+
+  * Note: Please refer to turnkey-core's changelog for changes common to all
+    appliances. Here we only describe changes specific to this appliance.
+
+ -- Alon Swartz <alon@turnkeylinux.org>  Tue, 29 Sep 2009 15:39:41 +0200
+
+turnkey-wordpress-2009.03 (1) hardy; urgency=low
+
+  * initial public release of TurnKey Linux WordPress
+
+  * SSL support out of the box
+
+  * wordpress related
+
+    - uploading of media (images, videos, etc.) supported
+    - permalinks configuration supported through admin console (convenience)
+    - automatic plugin upgrades supported (convenience)
+    - fixed password reset link bug (Debian #519798)
+    - auto-install security updates directly from debian stable (security)
+    - suppress annoying new version messages (updated directly from debian)
+    - wp_siteurl and wp_home are set automatically using HTTP_HOST
+    - welcome post includes useful information and login credentials
+
+  * regenerate WP secret key and mysql password during installation (security)
+
+  * mysql-related
+
+    - includes PhpMyAdmin (listening on port 12322 - uses SSL)
+    - set empty mysql root password in live/demo mode (for convenience)
+    - support configuring mysql root password during installation
+
+  * includes postfix MTA (bound to localhost) for sending of email from
+    wordpress (e.g., password recovery). Also includes webmin postfix
+    module for convenience.
+
+  * major component versions
+
+    wordpress       2.5.1-11
+    mysql-server    5.0.51a-3ubuntu5.4
+    apache2         2.2.8-1ubuntu0.5
+    phpmyadmin      2.11.8.1-5
+
+  * note: please refer to turnkey-core's changelog for changes common to all
+    appliances. Here we only describe changes specific to this appliance.
+
+ -- Alon Swartz <alon@turnkeylinux.org>  Thu, 12 Mar 2009 10:51:40 +0200
