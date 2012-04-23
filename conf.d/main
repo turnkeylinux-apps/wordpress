@@ -35,14 +35,16 @@ define('NONCE_SALT', '$(mcookie)$(mcookie)');
 
 \$table_prefix  = '$DB_PREFIX';
 
-define('WP_SITEURL', 'http://'.\$_SERVER['HTTP_HOST']);
-define('WP_HOME', 'http://'.\$_SERVER['HTTP_HOST']);
-
 // WordPress Localized Language, defaults to English.
 define ('WPLANG', '');
 
 // WordPress debugging mode (for developers).
 define('WP_DEBUG', false);
+
+// Single-Site (serves any hostname)
+// For Multi-Site, see: http://www.turnkeylinux.org/docs/wordpress/multisite
+define('WP_SITEURL', 'http://'.\$_SERVER['HTTP_HOST']);
+define('WP_HOME', 'http://'.\$_SERVER['HTTP_HOST']);
 
 /* That's all, stop editing! Happy blogging. */
 
