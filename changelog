@@ -1,3 +1,41 @@
+turnkey-wordpress-12.0 (1) turnkey; urgency=low
+
+  * WordPress:
+
+    - Upgraded to latest upstream archive.
+    - Upgraded all plugins to latest upstream version.
+    - Added wordpress-seo plugin (replaces all-in-one-seo-pack and
+      google-sitemap-generator).
+    - Added Multi-Site HowTo link to wp-config (convenience).
+    - Added "stop editing" line to wp-config (closes LP#973554).
+
+  * Major component versions
+
+    wordpress       3.3.2 (upstream archive)
+    apache2         2.2.16-6+squeeze7
+    mysql-server    5.1.63-0+squeeze1
+    phpmyadmin      4:3.3.7-7
+
+  * Note: Please refer to turnkey-core's changelog for changes common to all
+    appliances. Here we only describe changes specific to this appliance.
+
+ -- Alon Swartz <alon@turnkeylinux.org>  Wed, 01 Aug 2012 08:00:00 +0200
+
+turnkey-wordpress-11.3 (1) turnkey; urgency=low
+
+  * Installed security updates.
+  * Enabled etckeeper garbage collection by default.
+  * Upgraded to latest inithooks version (adhoc re-initialization via turnkey-init)
+
+ -- Alon Swartz <alon@turnkeylinux.org>  Mon, 05 Dec 2011 10:48:44 +0000
+
+turnkey-wordpress-11.2 (1) turnkey; urgency=low
+
+  * Installed security updates.
+  * Added HubDNS package and firstboot configuration.
+
+ -- Alon Swartz <alon@turnkeylinux.org>  Fri, 15 Jul 2011 07:47:08 +0000
+
 turnkey-wordpress-11.1 (1) turnkey; urgency=low
 
   * WordPress:
