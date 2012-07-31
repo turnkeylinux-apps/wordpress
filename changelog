@@ -3,7 +3,7 @@ turnkey-wordpress-12.0 (1) turnkey; urgency=low
   * WordPress:
 
     - Upgraded to latest upstream archive.
-    - Upgraded all plugins to latest upstream version.
+    - Upgraded all plugins to latest upstream versions.
     - Added wordpress-seo plugin (replaces all-in-one-seo-pack and
       google-sitemap-generator).
     - Added Multi-Site HowTo link to wp-config (convenience).
@@ -11,7 +11,7 @@ turnkey-wordpress-12.0 (1) turnkey; urgency=low
 
   * Major component versions
 
-    wordpress       3.3.2 (upstream archive)
+    wordpress       3.4.1 (upstream archive)
     apache2         2.2.16-6+squeeze7
     mysql-server    5.1.63-0+squeeze1
     phpmyadmin      4:3.3.7-7
