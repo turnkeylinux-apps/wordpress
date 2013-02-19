@@ -11,8 +11,8 @@ ADMIN_PASS=turnkey
 ADMIN_MAIL=admin@example.com
 
 # unpack wordpress
-tar -zxf /usr/local/src/wordpress*.tar.gz -C $(dirname $WPROOT)
-rm /usr/local/src/wordpress*
+tar -zxf /usr/local/src/latest.tar.gz -C $(dirname $WPROOT)
+rm /usr/local/src/latest.tar.gz
 
 # write the config file
 cat > $CONFIG_FILE << EOF
