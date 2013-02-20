@@ -12,4 +12,3 @@ php5-gd             /* wordpress dep */
 tinymce             /* wordpress dep */
 
 unzip               /* most wordpress plugins and themes are zip archives */
-curl                /* used by conf.d and useful to download plugins/themes */
