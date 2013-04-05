@@ -1,3 +1,31 @@
+turnkey-wordpress-12.1 (1) turnkey; urgency=low
+
+  * WordPress:
+
+    - Latest wordpress version and plugins will be installed at build
+      time, except for those specified below.
+
+    - Plugin updates:
+        - Removed akismet (bundled with wordpress installation)
+        - Removed maxblogpress-ping-optimizer (deprecated, wp has native support)
+        
+  * Added phpsh (interative shell for PHP) and php5-cli (generically useful).
+
+  * Hardcoded component versions:
+
+    wp-super-cache      1.2
+    wp-pagenavi         2.83
+    wp-db-backup        2.2.3
+    simple-tags         2.2
+    sociable            4.3.3
+    contact-form        7.3.3.3
+    podpress            8.8.10.13
+
+  * Note: Please refer to turnkey-core's changelog for changes common to all
+    appliances. Here we only describe changes specific to this appliance.
+
+ -- Alon Swartz <alon@turnkeylinux.org>  Fri, 05 Apr 2013 08:00:00 +0200
+
 turnkey-wordpress-12.0 (1) turnkey; urgency=low
 
   * WordPress:
