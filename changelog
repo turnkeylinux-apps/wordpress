@@ -11,7 +11,7 @@ turnkey-wordpress-12.1 (1) turnkey; urgency=low
         
   * Added phpsh (interative shell for PHP) and php5-cli (generically useful).
 
-  * Hardcoded component versions:
+  * Upstream source component versions:
 
     wp-super-cache      1.2
     wp-pagenavi         2.83
