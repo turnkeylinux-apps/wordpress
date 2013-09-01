@@ -10,6 +10,10 @@ ADMIN_USER=admin
 ADMIN_PASS=turnkey
 ADMIN_MAIL=admin@example.com
 
+# increase php memory limit
+PHPINI=/etc/php5/apache2/php.ini
+sed -i "s|^memory_limit.*|memory_limit = 64M|" $PHPINI
+
 # unpack wordpress
 tar -zxf /usr/local/src/latest.tar.gz -C $(dirname $WPROOT)
 rm /usr/local/src/latest.tar.gz
