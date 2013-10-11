@@ -1,12 +1,30 @@
 turnkey-wordpress-13.0 (1) turnkey; urgency=low
 
-  * Please refer to turnkey-core's changelog for changes common to all
-    appliances, as well as the following git logs:
-    
-    - https://github.com/turnkeylinux/common
-    - https://github.com/turnkeylinux-apps/wordpress
+  * WordPress:
 
- -- Alon Swartz <alon@turnkeylinux.org>  Tue, 06 Aug 2013 15:37:33 +0300
+    - Latest upstream version of WordPress and plugins (except for those
+      specified below).
+    - Increase PHP memory limit [#19].
+
+  * PHPMyAdmin:
+
+    - Configured to allow users preferences stored in database.
+    - Specified blowfish_secret and regeneration on firstboot (security).
+
+  * Upstream source component versions:
+
+    wp-super-cache      1.2
+    wp-pagenavi         2.83
+    wp-db-backup        2.2.3
+    simple-tags         2.2
+    sociable            4.3.3
+    contact-form        7.3.3.3
+    podpress            8.8.10.13
+
+  * Note: Please refer to turnkey-core's changelog for changes common to all
+    appliances. Here we only describe changes specific to this appliance.
+
+ -- Alon Swartz <alon@turnkeylinux.org>  Fri, 11 Oct 2013 11:35:02 +0300
 
 turnkey-wordpress-12.1 (1) turnkey; urgency=low
 
