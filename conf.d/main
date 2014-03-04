@@ -36,6 +36,7 @@ define('LOGGED_IN_KEY', '$(mcookie)$(mcookie)');
 define('LOGGED_IN_SALT', '$(mcookie)$(mcookie)');
 define('NONCE_KEY', '$(mcookie)$(mcookie)');
 define('NONCE_SALT', '$(mcookie)$(mcookie)');
+define('FS_METHOD', 'direct');
 
 \$table_prefix  = '$DB_PREFIX';
 
@@ -114,8 +115,10 @@ EOF
 PLUGINS_SRC="/usr/local/src/wp-plugins"
 PLUGINS_DST="/var/www/wordpress/wp-content/plugins"
 for plugin in $(ls $PLUGINS_SRC/*.zip); do unzip -o $plugin -d $PLUGINS_DST; done
-chown -R www-data:www-data $PLUGINS_DST
+chown -R www-data:www-data /var/www/wordpress/wp-content
 rm -rf $PLUGINS_SRC
+
+#
 
 # stop mysql server
 /etc/init.d/mysql stop
