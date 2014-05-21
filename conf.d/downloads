@@ -21,11 +21,11 @@ dl $URL/vipers-video-quicktags.zip $PLUGINS_SRC
 dl $URL/google-analytics-for-wordpress.latest-stable.zip $PLUGINS_SRC
 dl $URL/wp-polls.zip $PLUGINS_SRC
 dl $URL/ozh-admin-drop-down-menu.zip $PLUGINS_SRC
-dl $URL/wp-super-cache.1.2.zip $PLUGINS_SRC
-dl $URL/sociable.4.3.3.zip $PLUGINS_SRC
-dl $URL/simple-tags.2.2.zip $PLUGINS_SRC
-dl $URL/wp-db-backup.2.2.3.zip $PLUGINS_SRC
-dl $URL/podpress.8.8.10.13.zip $PLUGINS_SRC
-dl $URL/wp-pagenavi.2.83.zip $PLUGINS_SRC
-dl $URL/contact-form-7.3.3.3.zip $PLUGINS_SRC
+dl $URL/wp-super-cache.zip $PLUGINS_SRC
+dl $URL/sociable.zip $PLUGINS_SRC
+dl $URL/simple-tags.zip $PLUGINS_SRC
+dl $URL/wp-db-backup.zip $PLUGINS_SRC
+dl $URL/podpress.zip $PLUGINS_SRC
+dl $URL/wp-pagenavi.zip $PLUGINS_SRC
+dl $URL/contact-form.3.7.2.zip $PLUGINS_SRC
 
