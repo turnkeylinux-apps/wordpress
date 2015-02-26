@@ -16,16 +16,14 @@ mkdir -p $PLUGINS_SRC
 URL="http://downloads.wordpress.org/plugin"
 dl $URL/wordpress-seo.latest-stable.zip $PLUGINS_SRC
 dl $URL/nextgen-gallery.zip $PLUGINS_SRC
-dl $URL/stats.zip $PLUGINS_SRC
-dl $URL/vipers-video-quicktags.zip $PLUGINS_SRC
+dl $URL/jetpack.latest-stable.zip $PLUGINS_SRC
 dl $URL/google-analytics-for-wordpress.latest-stable.zip $PLUGINS_SRC
 dl $URL/wp-polls.zip $PLUGINS_SRC
 dl $URL/ozh-admin-drop-down-menu.zip $PLUGINS_SRC
 dl $URL/wp-super-cache.zip $PLUGINS_SRC
-dl $URL/sociable.zip $PLUGINS_SRC
+dl $URL/ultimate-social-media-icons.latest-stable.zip $PLUGINS_SRC
 dl $URL/simple-tags.zip $PLUGINS_SRC
-dl $URL/wp-db-backup.zip $PLUGINS_SRC
-#dl $URL/podpress.zip $PLUGINS_SRC
+dl $URL/backupwordpress.latest-stable.zip $PLUGINS_SRC
 dl $URL/wp-pagenavi.zip $PLUGINS_SRC
-dl $URL/contact-form.3.7.2.zip $PLUGINS_SRC
+dl $URL/contact-form-7.latest-stable.zip $PLUGINS_SRC
 

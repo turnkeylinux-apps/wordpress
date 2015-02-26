@@ -4,7 +4,7 @@ WordPress - Blog Publishing Platform
 `WordPress`_ is a state-of-the-art publishing platform with a focus on
 aesthetics, web standards, and usability. It is one of the worlds most
 popular blog publishing applications, includes tons of powerful core
-functionality, extendable via literally hundreds of plugins, and
+functionality, extendable via literally thousands of plugins, and
 supports full theming.
 
 This appliance includes all the standard features in `TurnKey Core`_,
@@ -30,19 +30,15 @@ and on top of that:
      optimized for blogging.
    - `WP Super Cache`_: Accelerates your blog by serving 99% of your
      visitors via static HTML files.
-   - `Sociable:`_ Promote your content by adding links to social sharing
+   - `Ultimate Social Media Icons:`_ Promote your content by adding links to social sharing
      and bookmarking sites.
-   - `Viper's Video Quicktags`_: easily embed videos from all the major
-     web video sites.
    - `Simple Tags`_: automatically adds tags and related posts to your
      content.
-   - `WP-DB-Backup`_: easily backup your core WordPress tables.  -
-     `Google Analytics for WordPress`_: track visitors, AdSense clicks,
+   - `WP-DB-Backup`_: easily backup your core WordPress tables.
+   - `Google Analytics for WordPress`_: track visitors, AdSense clicks,
      outgoing links, and search queries.
    - `WP-Polls`_: Adds an easily customizable AJAX poll system to your
      blog.
-   - `podPress`_: Adds features to make WordPress the ideal platform for
-     hosting a podcast.
    - `WP-PageNavi`_: Adds more advanced paging navigation.
    - `Ozh admin dropdown menu`_: Creates a drop down menu with all admin
      links.
