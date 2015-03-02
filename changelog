@@ -1,20 +1,20 @@
 turnkey-wordpress-13.1 (1) turnkey; urgency=low
 
+  * Apache2
+
+    - Replaced apache2 package with apache2-mpm-itk
+
   * WordPress:
 
-    - Latest upstream version of WordPress and plugins (except for those
-      specified below).
-    - Increase PHP memory limit [#19].
-
-  * Upstream source component versions:
-
-    wp-super-cache              1.2
-    wp-pagenavi                 2.83
+    - Latest upstream version of WordPress and plugins
+    - Increased PHP upload and max_posts size limits
+    - Made sure all the plugins are downloaded as the latest (stable)upstream version
 
   * Added plugins
   
-    jetpack           (new solution for wp.com services, replaces stats)
-    backupwordpress   (replaces wp-db-backup)
+    jetpack                      (new solution for wp.com services, replaces stats)
+    backupwordpress              (replaces wp-db-backup)
+    seriously-simple-podcasting  (replaces podpress)
 
   * Removed plugins
 
