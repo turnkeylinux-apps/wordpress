@@ -44,6 +44,8 @@ and on top of that:
      links.
    - `Contact From 7`_: Customizable contact forms supporting AJAX,
      CAPTCHA and Akismet integration.
+   - `WP-Update-Notifier`_: Sends email to notify you if there are any updates for your
+     WordPress site. Can notify about core, plugin and theme updates.
 
 - SSL support out of the box.
 - `PHPMyAdmin`_ administration frontend for MySQL (listening on port

@@ -36,7 +36,6 @@ define('LOGGED_IN_KEY', '$(mcookie)$(mcookie)');
 define('LOGGED_IN_SALT', '$(mcookie)$(mcookie)');
 define('NONCE_KEY', '$(mcookie)$(mcookie)');
 define('NONCE_SALT', '$(mcookie)$(mcookie)');
-define('FS_METHOD', 'direct');
 
 \$table_prefix  = '$DB_PREFIX';
 
@@ -45,6 +44,9 @@ define ('WPLANG', '');
 
 // WordPress debugging mode (for developers).
 define('WP_DEBUG', false);
+
+// WordPress update method
+define('FS_METHOD', 'direct');
 
 // Single-Site (serves any hostname)
 // For Multi-Site, see: http://www.turnkeylinux.org/docs/wordpress/multisite
@@ -105,10 +107,8 @@ rm $WPROOT/wp-admin/turnkey-install.php
 # edit first post to include useful information
 mysql --defaults-extra-file=/etc/mysql/debian.cnf <<EOF
 USE $NAME;
-UPDATE ${DB_PREFIX}posts SET post_title = 'Welcome to WordPress!'
-WHERE ID = '1';
-UPDATE ${DB_PREFIX}posts SET post_content = 'Getting started...<ul><li><a href="/wp-login.php">Login</a> as <b>admin</b> and get blogging!</li><li>Refer to the <a href="http://www.turnkeylinux.org/wordpress">TurnKey WordPress release notes</a></li><li>Refer to the <a href="http://codex.wordpress.org/Getting_Started_with_WordPress">Wordpress Getting Started Codex</a></li></ul>'
-WHERE ID = '1';
+UPDATE ${DB_PREFIX}posts SET post_title = 'Welcome to WordPress!' WHERE ID = '1';
+UPDATE ${DB_PREFIX}posts SET post_content = 'Getting started...<ul><li><a href="/wp-login.php">Login</a> as <b>admin</b> and get blogging!</li><li>Refer to the <a href="http://www.turnkeylinux.org/wordpress">TurnKey WordPress release notes</a></li><li>Refer to the <a href="http://codex.wordpress.org/Getting_Started_with_WordPress">Wordpress Getting Started Codex</a></li></ul>' WHERE ID = '1';
 EOF
 
 # unpack and configure plugins
