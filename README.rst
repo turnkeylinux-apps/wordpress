@@ -26,15 +26,16 @@ and on top of that:
      and XML sitemaps.
    - `NextGEN Gallery`_: Easy to use image gallery with a Flash
      slideshow option.
-   - `WordPress.com Stats`_: Provides detailed visitor statistics,
-     optimized for blogging.
+   - `JetPack for WordPress`_: Jetpack adds powerful features previously
+     only available to WordPress.com users including customization,
+     traffic, mobile, content, and performance tools.
    - `WP Super Cache`_: Accelerates your blog by serving 99% of your
      visitors via static HTML files.
    - `Ultimate Social Media Icons:`_ Promote your content by adding links to social sharing
      and bookmarking sites.
    - `Simple Tags`_: automatically adds tags and related posts to your
      content.
-   - `WP-DB-Backup`_: easily backup your core WordPress tables.
+   - `BackupWordPress`_: easily backup your core WordPress tables.
    - `Google Analytics for WordPress`_: track visitors, AdSense clicks,
      outgoing links, and search queries.
    - `WP-Polls`_: Adds an easily customizable AJAX poll system to your
@@ -46,6 +47,7 @@ and on top of that:
      CAPTCHA and Akismet integration.
    - `WP-Update-Notifier`_: Sends email to notify you if there are any updates for your
      WordPress site. Can notify about core, plugin and theme updates.
+   - `Seriously Simple Podcasting`_: Simple Podcasting from your WordPress site.
 
 - SSL support out of the box.
 - `PHPMyAdmin`_ administration frontend for MySQL (listening on port

@@ -1,14 +1,11 @@
 turnkey-wordpress-13.1 (1) turnkey; urgency=low
 
-  * Apache2
-
-    - Replaced apache2 package with apache2-mpm-itk
-
   * WordPress:
 
     - Latest upstream version of WordPress and plugins
     - Increased PHP upload and max_posts size limits
     - Made sure all the plugins are downloaded as the latest (stable)upstream version
+    - WordPress can now updat itself and install plugins without asking for FTP credentials
 
   * Added plugins
   

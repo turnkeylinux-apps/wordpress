@@ -17,7 +17,6 @@ sed -i "s|^upload_max_filesize.*|upload_max_filesize = 16M|" $PHPINI
 sed -i "s|^post_max_size.*|post_max_size = 48M|" $PHPINI
 sed -i "s|^allow_url_fopen.*|allow_url_fopen = On|" $PHPINI
 
-
 # unpack wordpress
 tar -zxf /usr/local/src/latest.tar.gz -C $(dirname $WPROOT)
 rm /usr/local/src/latest.tar.gz
@@ -121,8 +120,6 @@ PLUGINS_DST="/var/www/wordpress/wp-content/plugins"
 for plugin in $(ls $PLUGINS_SRC/*.zip); do unzip -o $plugin -d $PLUGINS_DST; done
 chown -R www-data:www-data /var/www/wordpress/wp-content
 rm -rf $PLUGINS_SRC
-
-#
 
 # stop mysql server
 /etc/init.d/mysql stop
