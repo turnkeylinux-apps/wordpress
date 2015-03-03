@@ -14,11 +14,11 @@ and on top of that:
    
    - Installed from upstream source code to /var/www/wordpress
    - Integrated upgrade mechanism: get WordPress updates straight from
-     WordPress's creator Automattic.
+     WordPress' creator Automattic.
    - Uploading of media such as images, videos, etc.
    - Permalinks configuration supported through admin console
      (convenience)
-   - Automatic plugin upgrades are supported (convenience).
+   - Automatic updates are supported (convenience).
 
 - Useful and popular Wordpress plugins:
    
@@ -31,7 +31,7 @@ and on top of that:
      traffic, mobile, content, and performance tools.
    - `WP Super Cache`_: Accelerates your blog by serving 99% of your
      visitors via static HTML files.
-   - `Ultimate Social Media Icons:`_ Promote your content by adding links to social sharing
+   - `Ultimate Social Media Icons`_: Promote your content by adding links to social sharing
      and bookmarking sites.
    - `Simple Tags`_: automatically adds tags and related posts to your
      content.
@@ -70,17 +70,17 @@ Credentials *(passwords set at first boot)*
 .. _TurnKey Core: http://www.turnkeylinux.org/core
 .. _Wordpress-SEO: http://yoast.com/wordpress/seo/
 .. _NextGEN Gallery: http://wordpress.org/extend/plugins/nextgen-gallery/
-.. _WordPress.com Stats: http://wordpress.org/extend/plugins/stats/
+.. _JetPack for WordPress: http://wordpress.org/extend/plugins/jetpack/
 .. _WP Super Cache: http://wordpress.org/extend/plugins/wp-super-cache/
-.. _`Sociable:`: http://wordpress.org/extend/plugins/sociable/
-.. _Viper's Video Quicktags: http://wordpress.org/extend/plugins/vipers-video-quicktags/
+.. _Ultimate Social Media Icons: http://wordpress.org/extend/plugins/ultimate-social-media-icons/
 .. _Simple Tags: http://wordpress.org/extend/plugins/simple-tags/
-.. _WP-DB-Backup: http://wordpress.org/extend/plugins/wp-db-backup/
+.. _BackupWordPress: http://wordpress.org/extend/plugins/backupwordpress/
 .. _Google Analytics for WordPress: http://yoast.com/wordpress/google-analytics/
 .. _WP-Polls: http://wordpress.org/extend/plugins/wp-polls/
-.. _podPress: http://wordpress.org/extend/plugins/podpress/
+.. _WP-Update-Notifier: http://wordpress.org/extend/plugins/wp-updates-notifier/
 .. _WP-PageNavi: http://wordpress.org/extend/plugins/wp-pagenavi/
 .. _Ozh admin dropdown menu: http://wordpress.org/extend/plugins/ozh-admin-drop-down-menu/
 .. _Contact From 7: http://wordpress.org/extend/plugins/contact-form-7/
+.. _Seriously Simple Podcasting: http://wordpress.org/extend/plugins/seriously-simple-podcasting/
 .. _PHPMyAdmin: http://www.phpmyadmin.net/
 .. _WordPress docs: http://www.turnkeylinux.org/docs/wordpress
