@@ -11,4 +11,6 @@ php-gettext         /* wordpress dep */
 php5-gd             /* wordpress dep */
 tinymce             /* wordpress dep */
 
+php5-curl           /* needed by some plugins */
+
 unzip               /* most wordpress plugins and themes are zip archives */

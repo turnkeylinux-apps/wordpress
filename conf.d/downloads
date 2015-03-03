@@ -28,3 +28,4 @@ dl $URL/seriously-simple-podcasting.latest-stable.zip $PLUGINS_SRC
 dl $URL/wp-pagenavi.latest-stable.zip $PLUGINS_SRC
 dl $URL/contact-form-7.latest-stable.zip $PLUGINS_SRC
 
+dl https://github.com/l3rady/wp-updates-notifier/archive/master.zip $PLUGINS_SRC
