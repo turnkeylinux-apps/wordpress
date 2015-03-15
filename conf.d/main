@@ -10,9 +10,12 @@ ADMIN_USER=admin
 ADMIN_PASS=turnkey
 ADMIN_MAIL=admin@example.com
 
-# increase php memory limit
+# increase php running limits
 PHPINI=/etc/php5/apache2/php.ini
-sed -i "s|^memory_limit.*|memory_limit = 64M|" $PHPINI
+sed -i "s|^memory_limit.*|memory_limit = 128M|" $PHPINI
+sed -i "s|^upload_max_filesize.*|upload_max_filesize = 16M|" $PHPINI
+sed -i "s|^post_max_size.*|post_max_size = 48M|" $PHPINI
+sed -i "s|^allow_url_fopen.*|allow_url_fopen = On|" $PHPINI
 
 # unpack wordpress
 tar -zxf /usr/local/src/latest.tar.gz -C $(dirname $WPROOT)
@@ -36,7 +39,6 @@ define('LOGGED_IN_KEY', '$(mcookie)$(mcookie)');
 define('LOGGED_IN_SALT', '$(mcookie)$(mcookie)');
 define('NONCE_KEY', '$(mcookie)$(mcookie)');
 define('NONCE_SALT', '$(mcookie)$(mcookie)');
-define('FS_METHOD', 'direct');
 
 \$table_prefix  = '$DB_PREFIX';
 
@@ -45,6 +47,9 @@ define ('WPLANG', '');
 
 // WordPress debugging mode (for developers).
 define('WP_DEBUG', false);
+
+// WordPress update method
+define('FS_METHOD', 'direct');
 
 // Single-Site (serves any hostname)
 // For Multi-Site, see: http://www.turnkeylinux.org/docs/wordpress/multisite
@@ -105,10 +110,8 @@ rm $WPROOT/wp-admin/turnkey-install.php
 # edit first post to include useful information
 mysql --defaults-extra-file=/etc/mysql/debian.cnf <<EOF
 USE $NAME;
-UPDATE ${DB_PREFIX}posts SET post_title = 'Welcome to WordPress!'
-WHERE ID = '1';
-UPDATE ${DB_PREFIX}posts SET post_content = 'Getting started...<ul><li><a href="/wp-login.php">Login</a> as <b>admin</b> and get blogging!</li><li>Refer to the <a href="http://www.turnkeylinux.org/wordpress">TurnKey WordPress release notes</a></li><li>Refer to the <a href="http://codex.wordpress.org/Getting_Started_with_WordPress">Wordpress Getting Started Codex</a></li></ul>'
-WHERE ID = '1';
+UPDATE ${DB_PREFIX}posts SET post_title = 'Welcome to WordPress!' WHERE ID = '1';
+UPDATE ${DB_PREFIX}posts SET post_content = 'Getting started...<ul><li><a href="/wp-login.php">Login</a> as <b>admin</b> and get blogging!</li><li>Refer to the <a href="http://www.turnkeylinux.org/wordpress">TurnKey WordPress release notes</a></li><li>Refer to the <a href="http://codex.wordpress.org/Getting_Started_with_WordPress">Wordpress Getting Started Codex</a></li></ul>' WHERE ID = '1';
 EOF
 
 # unpack and configure plugins
@@ -117,8 +120,6 @@ PLUGINS_DST="/var/www/wordpress/wp-content/plugins"
 for plugin in $(ls $PLUGINS_SRC/*.zip); do unzip -o $plugin -d $PLUGINS_DST; done
 chown -R www-data:www-data /var/www/wordpress/wp-content
 rm -rf $PLUGINS_SRC
-
-#
 
 # stop mysql server
 /etc/init.d/mysql stop

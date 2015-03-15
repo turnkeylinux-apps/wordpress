@@ -14,6 +14,7 @@ import hashlib
 from dialog_wrapper import Dialog
 from mysqlconf import MySQL
 
+
 def usage(s=None):
     if s:
         print >> sys.stderr, "Error:", s
