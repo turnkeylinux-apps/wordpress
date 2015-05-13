@@ -1,3 +1,11 @@
+turnkey-wordpress-14.0 (1) turnkey; urgency=low
+
+ * Operation System
+
+    - Now operating on Debian Jessie (version 8)
+    
+-- Jeroen Peters <jeroenpeters1986@gmail.com>  Wed, 13 May 2015 15:00:00 +0100
+
 turnkey-wordpress-13.1 (1) turnkey; urgency=low
 
   * WordPress:
