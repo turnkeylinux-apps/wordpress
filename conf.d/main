@@ -81,7 +81,7 @@ EOF
 
 # setup apache configuration and complete wordpress installation
 a2dissite 000-default
-a2ensite wordpress
+a2ensite wordpress.conf
 a2enmod rewrite
 /etc/init.d/apache2 start
 
