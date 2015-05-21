@@ -50,7 +50,7 @@ and on top of that:
    - `Seriously Simple Podcasting`_: Simple Podcasting from your WordPress site.
 
 - SSL support out of the box.
-- `PHPMyAdmin`_ administration frontend for MySQL (listening on port
+- `Adminer`_ administration frontend for MySQL (listening on port
   12322 - uses SSL).
 - Postfix MTA (bound to localhost) to allow sending of email (e.g.,
   password recovery).
