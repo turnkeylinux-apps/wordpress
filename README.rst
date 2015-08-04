@@ -82,5 +82,5 @@ Credentials *(passwords set at first boot)*
 .. _Ozh admin dropdown menu: http://wordpress.org/extend/plugins/ozh-admin-drop-down-menu/
 .. _Contact From 7: http://wordpress.org/extend/plugins/contact-form-7/
 .. _Seriously Simple Podcasting: http://wordpress.org/extend/plugins/seriously-simple-podcasting/
-.. _PHPMyAdmin: http://www.phpmyadmin.net/
+.. _Adminer: http://www.adminer.org/
 .. _WordPress docs: http://www.turnkeylinux.org/docs/wordpress
