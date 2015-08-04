@@ -1,6 +1,6 @@
-turnkey-wordpress-13.1 (1) turnkey; urgency=low
+turnkey-wordpress-14.0 (1) turnkey; urgency=low
 
-  * WordPress:
+   * WordPress:
 
     - Latest upstream version of WordPress and plugins
     - Increased PHP upload and max_posts size limits
@@ -22,10 +22,8 @@ turnkey-wordpress-13.1 (1) turnkey; urgency=low
 
   * Note: Please refer to turnkey-core's changelog for changes common to all
     appliances. Here we only describe changes specific to this appliance.
-
- -- Jeroen Peters <jeroenpeters1986@gmail.com>  Fri, 26 Feb 2015 11:35:02 +0300
- -- Built on version 13.0 of Alon Swartz <alon@turnkeylinux.org>
-
+    
+-- Jeroen Peters <jeroenpeters1986@gmail.com>  Wed, 13 May 2015 15:00:00 +0100
 
 turnkey-wordpress-13.0 (1) turnkey; urgency=low
 
