@@ -45,7 +45,7 @@ def main():
         if 'd' not in locals():
             d = Dialog('TurnKey Linux - First boot configuration')
 
-        adminuser = d.get_username(
+        adminuser = d.get_input(
             "Wordpress Admin Username",
             "Please enter a username for your WordPress admin-account. "
             "This is used to access the WordPress Admin Dashboard.",
