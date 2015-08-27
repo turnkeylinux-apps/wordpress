@@ -9,6 +9,7 @@ Option:
 
 import sys
 import getopt
+import inithooks_cache
 import hashlib
 
 from dialog_wrapper import Dialog
@@ -53,6 +54,8 @@ def main():
             "Wordpress Email",
             "Please enter email address for the Wordpress 'admin' account.",
             "admin@example.com")
+
+    inithooks_cache.write('APP_EMAIL', email)
     
     hashpass = hashlib.md5(password).hexdigest()
 
