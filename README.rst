@@ -67,7 +67,7 @@ Credentials *(passwords set at first boot)*
 
 
 .. _WordPress: http://wordpress.org
-.. _TurnKey Core: http://www.turnkeylinux.org/core
+.. _TurnKey Core: https://www.turnkeylinux.org/core
 .. _Wordpress-SEO: http://yoast.com/wordpress/seo/
 .. _NextGEN Gallery: http://wordpress.org/extend/plugins/nextgen-gallery/
 .. _JetPack for WordPress: http://wordpress.org/extend/plugins/jetpack/
@@ -83,4 +83,4 @@ Credentials *(passwords set at first boot)*
 .. _Contact From 7: http://wordpress.org/extend/plugins/contact-form-7/
 .. _Seriously Simple Podcasting: http://wordpress.org/extend/plugins/seriously-simple-podcasting/
 .. _Adminer: http://www.adminer.org/
-.. _WordPress docs: http://www.turnkeylinux.org/docs/wordpress
+.. _WordPress docs: https://www.turnkeylinux.org/docs/wordpress
