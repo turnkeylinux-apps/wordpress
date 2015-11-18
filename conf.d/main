@@ -52,7 +52,7 @@ define('WP_DEBUG', false);
 define('FS_METHOD', 'direct');
 
 // Single-Site (serves any hostname)
-// For Multi-Site, see: http://www.turnkeylinux.org/docs/wordpress/multisite
+// For Multi-Site, see: https://www.turnkeylinux.org/docs/wordpress/multisite
 define('WP_SITEURL', 'http://'.\$_SERVER['HTTP_HOST']);
 define('WP_HOME', 'http://'.\$_SERVER['HTTP_HOST']);
 
@@ -111,7 +111,7 @@ rm $WPROOT/wp-admin/turnkey-install.php
 mysql --defaults-extra-file=/etc/mysql/debian.cnf <<EOF
 USE $NAME;
 UPDATE ${DB_PREFIX}posts SET post_title = 'Welcome to WordPress!' WHERE ID = '1';
-UPDATE ${DB_PREFIX}posts SET post_content = 'Getting started...<ul><li><a href="/wp-login.php">Login</a> as <b>admin</b> and get blogging!</li><li>Refer to the <a href="http://www.turnkeylinux.org/wordpress">TurnKey WordPress release notes</a></li><li>Refer to the <a href="http://codex.wordpress.org/Getting_Started_with_WordPress">Wordpress Getting Started Codex</a></li></ul>' WHERE ID = '1';
+UPDATE ${DB_PREFIX}posts SET post_content = 'Getting started...<ul><li><a href="/wp-login.php">Login</a> as <b>admin</b> and get blogging!</li><li>Refer to the <a href="https://www.turnkeylinux.org/wordpress">TurnKey WordPress release notes</a></li><li>Refer to the <a href="http://codex.wordpress.org/Getting_Started_with_WordPress">Wordpress Getting Started Codex</a></li></ul>' WHERE ID = '1';
 EOF
 
 # unpack and configure plugins

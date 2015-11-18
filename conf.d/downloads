@@ -11,7 +11,7 @@ PLUGINS_SRC="/usr/local/src/wp-plugins"
 # wordpress installation
 dl http://wordpress.org/latest.tar.gz $SRC
 
-# wordpress plugins (see http://www.turnkeylinux.org/wordpress)
+# wordpress plugins (see https://www.turnkeylinux.org/wordpress)
 mkdir -p $PLUGINS_SRC
 URL="http://downloads.wordpress.org/plugin"
 dl $URL/wordpress-seo.latest-stable.zip $PLUGINS_SRC
