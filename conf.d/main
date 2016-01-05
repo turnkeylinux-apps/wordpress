@@ -121,6 +121,12 @@ for plugin in $(ls $PLUGINS_SRC/*.zip); do unzip -o $plugin -d $PLUGINS_DST; don
 chown -R www-data:www-data /var/www/wordpress/wp-content
 rm -rf $PLUGINS_SRC
 
+# fix permissions for updates
+
+chown -R www-data:www-data $WPROOT
+find $WPROOT -type d -exec chmod 755 {} \;
+find $WPROOT -type f -exec chmod 644 {} \;
+
 # stop mysql server
 /etc/init.d/mysql stop
 
