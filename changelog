@@ -1,3 +1,14 @@
+turnkey-wordpress-14.1 (1) turnkey; urgency=low
+
+  * WordPress:
+
+    - Latest upstream version of WordPress and plugins
+
+  * Note: Please refer to turnkey-core's changelog for changes common to all
+    appliances. Here we only describe changes specific to this appliance.
+
+ -- Stefan Davis <nafets.sivad@gmail.com>  Wed, 13 Jan 2016 04:15:09 +1100
+
 turnkey-wordpress-14.0 (1) turnkey; urgency=low
 
    * WordPress:
@@ -27,7 +38,7 @@ turnkey-wordpress-14.0 (1) turnkey; urgency=low
   * Note: Please refer to turnkey-core's changelog for changes common to all
     appliances. Here we only describe changes specific to this appliance.
     
--- Jeroen Peters <jeroenpeters1986@gmail.com>  Wed, 13 May 2015 15:00:00 +0100
+ -- Jeroen Peters <jeroenpeters1986@gmail.com>  Wed, 13 May 2015 15:00:00 +0100
 
 turnkey-wordpress-13.0 (1) turnkey; urgency=low
 

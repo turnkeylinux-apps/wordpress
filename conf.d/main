@@ -51,6 +51,10 @@ define('WP_DEBUG', false);
 // WordPress update method
 define('FS_METHOD', 'direct');
 
+// WordPress update policy
+define('AUTOMATIC_UPDATER_DISABLED', false);
+define('WP_AUTO_UPDATE_CORE', 'minor');
+
 // Single-Site (serves any hostname)
 // For Multi-Site, see: https://www.turnkeylinux.org/docs/wordpress/multisite
 define('WP_SITEURL', 'http://'.\$_SERVER['HTTP_HOST']);
@@ -120,6 +124,12 @@ PLUGINS_DST="/var/www/wordpress/wp-content/plugins"
 for plugin in $(ls $PLUGINS_SRC/*.zip); do unzip -o $plugin -d $PLUGINS_DST; done
 chown -R www-data:www-data /var/www/wordpress/wp-content
 rm -rf $PLUGINS_SRC
+
+# fix permissions for updates
+
+chown -R www-data:www-data $WPROOT
+find $WPROOT -type d -exec chmod 755 {} \;
+find $WPROOT -type f -exec chmod 644 {} \;
 
 # stop mysql server
 /etc/init.d/mysql stop

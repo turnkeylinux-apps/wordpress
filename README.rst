@@ -18,8 +18,11 @@ and on top of that:
    - Uploading of media such as images, videos, etc.
    - Permalinks configuration supported through admin console
      (convenience)
-   - Automatic updates are supported (convenience).
-
+   - Automatic minor updates are supported (convenience).
+   - **Security note**: Major updates to wordpress may require
+     supervision so they **ARE NOT** configured to install automatically.
+     See upstream documentation for updating Wordpress major releases.
+               
 - Useful and popular Wordpress plugins:
    
    - `Wordpress-SEO`_: Optimizes your WordPress blog for search engines
