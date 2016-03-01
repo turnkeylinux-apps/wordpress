@@ -21,7 +21,7 @@ dl $URL/google-analytics-for-wordpress.latest-stable.zip $PLUGINS_SRC
 dl $URL/wp-polls.latest-stable.zip $PLUGINS_SRC
 dl $URL/ozh-admin-drop-down-menu.latest-stable.zip $PLUGINS_SRC
 dl $URL/wp-super-cache.latest-stable.zip $PLUGINS_SRC
-dl $URL/ultimate-social-media-icons.latest-stable.zip $PLUGINS_SRC
+#dl $URL/ultimate-social-media-icons.latest-stable.zip $PLUGINS_SRC
 dl $URL/simple-tags.latest-stable.zip $PLUGINS_SRC
 dl $URL/backupwordpress.latest-stable.zip $PLUGINS_SRC
 dl $URL/seriously-simple-podcasting.latest-stable.zip $PLUGINS_SRC
