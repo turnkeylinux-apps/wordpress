@@ -39,6 +39,7 @@ define('LOGGED_IN_KEY', '$(mcookie)$(mcookie)');
 define('LOGGED_IN_SALT', '$(mcookie)$(mcookie)');
 define('NONCE_KEY', '$(mcookie)$(mcookie)');
 define('NONCE_SALT', '$(mcookie)$(mcookie)');
+define('DISABLE_WP_CRON', true);
 
 \$table_prefix  = '$DB_PREFIX';
 
