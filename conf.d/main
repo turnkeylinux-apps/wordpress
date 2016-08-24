@@ -39,6 +39,7 @@ define('LOGGED_IN_KEY', '$(mcookie)$(mcookie)');
 define('LOGGED_IN_SALT', '$(mcookie)$(mcookie)');
 define('NONCE_KEY', '$(mcookie)$(mcookie)');
 define('NONCE_SALT', '$(mcookie)$(mcookie)');
+define('DISABLE_WP_CRON', true);
 
 \$table_prefix  = '$DB_PREFIX';
 
@@ -116,20 +117,20 @@ mysql --defaults-extra-file=/etc/mysql/debian.cnf <<EOF
 USE $NAME;
 UPDATE ${DB_PREFIX}posts SET post_title = 'Welcome to WordPress!' WHERE ID = '1';
 UPDATE ${DB_PREFIX}posts SET post_content = 'Getting started...<ul><li><a href="/wp-login.php">Login</a> as <b>admin</b> and get blogging!</li><li>Refer to the <a href="http://www.turnkeylinux.org/wordpress">TurnKey WordPress release notes</a></li><li>Refer to the <a href="http://codex.wordpress.org/Getting_Started_with_WordPress">Wordpress Getting Started Codex</a></li><li>Check out some of the numerous WordPress plugins: <ul>
-<li><a href="http://yoast.com/wordpress/seo/">Wordpress-SEO</a>:Optimizes your WordPress blog for search engines and XML sitemaps.</li>
-<li><a href="http://wordpress.org/extend/plugins/nextgen-gallery/">NextGEN Gallery</a>:Easy to use image gallery with a Flash slideshow option.</li>
-<li><a href="http://wordpress.org/extend/plugins/jetpack/">JetPack for WordPress</a>:Jetpack adds powerful features previously only available to WordPress.com users including customization, traffic, mobile, content, and performance tools.</li>
-<li><a href="http://wordpress.org/extend/plugins/wp-super-cache/">WP Super Cache</a>:Accelerates your blog by serving 99% of your visitors via static HTML files.</li>
-<li><a href="http://wordpress.org/extend/plugins/ultimate-social-media-icons/">Ultimate Social Media Icons</a>:Promote your content by adding links to social sharing and bookmarking sites.</li>
-<li><a href="http://wordpress.org/extend/plugins/simple-tags/">Simple Tags</a>:automatically adds tags and related posts to your content.</li>
-<li><a href="http://wordpress.org/extend/plugins/backupwordpress/">BackupWordPress</a>:easily backup your core WordPress tables.</li>
-<li><a href="http://yoast.com/wordpress/google-analytics/">Google Analytics for WordPress</a>:track visitors, AdSense clicks, outgoing links, and search queries.</li>
-<li><a href="http://wordpress.org/extend/plugins/wp-polls/">WP-Polls</a>:Adds an easily customizable AJAX poll system to your blog.</li>
-<li><a href="http://wordpress.org/extend/plugins/wp-updates-notifier/">WP-PageNavi</a>:Adds more advanced paging navigation.</li>
-<li><a href="http://wordpress.org/extend/plugins/wp-pagenavi/">Ozh admin dropdown menu</a>:Creates a drop down menu with all admin links.</li>
-<li><a href="http://wordpress.org/extend/plugins/ozh-admin-drop-down-menu/">Contact From 7</a>:Customizable contact forms supporting AJAX, CAPTCHA and Akismet integration.</li>
-<li><a href="http://wordpress.org/extend/plugins/contact-form-7/">WP-Update-Notifier</a>:Sends email to notify you if there are any updates for your WordPress site. Can notify about core, plugin and theme updates.</li>
-<li><a href="http://wordpress.org/extend/plugins/seriously-simple-podcasting/">Seriously Simple Podcasting</a>:Simple Podcasting from your WordPress site.</li>
+<li><a href="http://yoast.com/wordpress/seo/">Wordpress-SEO</a>: Optimizes your WordPress blog for search engines and XML sitemaps.</li>
+<li><a href="http://wordpress.org/extend/plugins/nextgen-gallery/">NextGEN Gallery</a>: Easy to use image gallery with a Flash slideshow option.</li>
+<li><a href="http://wordpress.org/extend/plugins/jetpack/">JetPack for WordPress</a>: Jetpack adds powerful features previously only available to WordPress.com users including customization, traffic, mobile, content, and performance tools.</li>
+<li><a href="http://wordpress.org/extend/plugins/wp-super-cache/">WP Super Cache</a>: Accelerates your blog by serving 99% of your visitors via static HTML files.</li>
+<li><a href="http://wordpress.org/extend/plugins/ultimate-social-media-icons/">Ultimate Social Media Icons</a>: Promote your content by adding links to social sharing and bookmarking sites.</li>
+<li><a href="http://wordpress.org/extend/plugins/simple-tags/">Simple Tags</a>: automatically adds tags and related posts to your content.</li>
+<li><a href="http://wordpress.org/extend/plugins/backupwordpress/">BackupWordPress</a>: easily backup your core WordPress tables.</li>
+<li><a href="http://yoast.com/wordpress/google-analytics/">Google Analytics for WordPress</a>: track visitors, AdSense clicks, outgoing links, and search queries.</li>
+<li><a href="http://wordpress.org/extend/plugins/wp-polls/">WP-Polls</a>: Adds an easily customizable AJAX poll system to your blog.</li>
+<li><a href="http://wordpress.org/extend/plugins/wp-updates-notifier/">WP-PageNavi</a>: Adds more advanced paging navigation.</li>
+<li><a href="http://wordpress.org/extend/plugins/wp-pagenavi/">Ozh admin dropdown menu</a>: Creates a drop down menu with all admin links.</li>
+<li><a href="http://wordpress.org/extend/plugins/ozh-admin-drop-down-menu/">Contact From 7</a>: Customizable contact forms supporting AJAX, CAPTCHA and Akismet integration.</li>
+<li><a href="http://wordpress.org/extend/plugins/contact-form-7/">WP-Update-Notifier</a>: Sends email to notify you if there are any updates for your WordPress site. Can notify about core, plugin and theme updates.</li>
+<li><a href="http://wordpress.org/extend/plugins/seriously-simple-podcasting/">Seriously Simple Podcasting</a>: Simple Podcasting from your WordPress site.</li>
 </ul></li></ul>' WHERE ID = '1';
 EOF
 
