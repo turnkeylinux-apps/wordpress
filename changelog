@@ -1,3 +1,21 @@
+turnkey-wordpress-14.2 (1) turnkey; urgency=low
+
+  * Upgraded WordPress to latest upstream version.
+
+  * Install "pristine" WordPress (no default plugins). Previous default plugins
+    are now recommendations on landing page [closes #664].
+
+  * Disabled WP-cron; substitute with Linux cron [closes #545].
+
+  * Updated Adminer to 4.2.5
+
+  * Installed security updates.
+
+  * Note: Please refer to turnkey-core's changelog for changes common to all
+    appliances. Here we only describe changes specific to this appliance.
+
+ -- Jeremy Davis <jeremy@turnkeylinux.org>  Wed, 19 Apr 2017 13:12:14 +1000
+
 turnkey-wordpress-14.1 (1) turnkey; urgency=low
 
   * WordPress:
