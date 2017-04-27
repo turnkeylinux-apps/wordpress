@@ -1,6 +1,6 @@
 turnkey-wordpress-14.2 (1) turnkey; urgency=low
 
-  * Upgraded WordPress to latest upstream version.
+  * Upgraded WordPress to latest upstream version (v4.7.4).
 
   * Install "pristine" WordPress (no default plugins). Previous default plugins
     are now recommendations on landing page [closes #664].
