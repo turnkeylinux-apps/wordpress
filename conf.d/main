@@ -11,7 +11,7 @@ ADMIN_PASS=turnkey
 ADMIN_MAIL=admin@example.com
 
 # increase php running limits
-PHPINI=/etc/php5/apache2/php.ini
+PHPINI=/etc/php/7.0/apache2/php.ini
 sed -i "s|^memory_limit.*|memory_limit = 128M|" $PHPINI
 sed -i "s|^upload_max_filesize.*|upload_max_filesize = 16M|" $PHPINI
 sed -i "s|^post_max_size.*|post_max_size = 48M|" $PHPINI
@@ -88,7 +88,8 @@ EOF
 a2dissite 000-default
 a2ensite wordpress
 a2enmod rewrite
-/etc/init.d/apache2 start
+
+APACHE_STARTED_BY_SYSTEMD="y" /usr/sbin/apachectl start
 
 cat >$WPROOT/wp-admin/turnkey-install.php<<EOF
 <?php
@@ -110,7 +111,7 @@ EOF
 curl http://127.0.0.1/wp-admin/turnkey-install.php >/dev/null
 rm $WPROOT/wp-admin/turnkey-install.php
 
-/etc/init.d/apache2 stop
+/usr/sbin/apachectl stop
 
 # edit first post to include useful information
 mysql --defaults-extra-file=/etc/mysql/debian.cnf <<EOF
