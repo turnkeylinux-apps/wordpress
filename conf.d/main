@@ -89,7 +89,7 @@ a2dissite 000-default
 a2ensite wordpress
 a2enmod rewrite
 
-APACHE_STARTED_BY_SYSTEMD="y" /usr/sbin/apachectl start
+service apache2 start
 
 cat >$WPROOT/wp-admin/turnkey-install.php<<EOF
 <?php
@@ -111,7 +111,7 @@ EOF
 curl http://127.0.0.1/wp-admin/turnkey-install.php >/dev/null
 rm $WPROOT/wp-admin/turnkey-install.php
 
-/usr/sbin/apachectl stop
+service apache2 stop
 
 # edit first post to include useful information
 mysql --defaults-extra-file=/etc/mysql/debian.cnf <<EOF
