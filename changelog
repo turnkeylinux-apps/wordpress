@@ -7,7 +7,7 @@ turnkey-wordpress-15.0 (1) turnkey; urgency=low
   * Replace MySQL with MariaDB
 
   * Note: Please refer to turnkey-core's changelog for changes common to all
-    appliances. Here we only describe changes specdific to this appliance.
+    appliances. Here we only describe changes specific to this appliance.
 
  -- Stefan Davis <stefan@turnkeylinux.org>  Thu, 09 Nov 2017 22:49:52 +1100
 
