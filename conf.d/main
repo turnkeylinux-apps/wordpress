@@ -72,7 +72,7 @@ EOF
 chgrp www-data "${CONFIG_FILE}"
 
 # start mysql server
-/etc/init.d/mysql start
+service mysql start
 
 # create the database and user
 mysql --defaults-extra-file=/etc/mysql/debian.cnf <<EOF
@@ -89,13 +89,11 @@ a2dissite 000-default
 a2ensite wordpress
 a2enmod rewrite
 
-service apache2 start
-
 cat >$WPROOT/wp-admin/turnkey-install.php<<EOF
 <?php
 define('WP_INSTALLING', true);
-require_once('../wp-config.php');
-require_once('./includes/upgrade.php');
+require_once('$WPROOT/wp-config.php');
+require_once('$WPROOT/wp-admin/includes/upgrade.php');
 
 //install system
 wp_install("TurnKey Linux", '$ADMIN_USER', '$ADMIN_MAIL', 1);
@@ -108,10 +106,8 @@ wp_update_user(\$user);
 ?>
 EOF
 
-curl http://127.0.0.1/wp-admin/turnkey-install.php >/dev/null
+php $WPROOT/wp-admin/turnkey-install.php
 rm $WPROOT/wp-admin/turnkey-install.php
-
-service apache2 stop
 
 # edit first post to include useful information
 mysql --defaults-extra-file=/etc/mysql/debian.cnf <<EOF
@@ -144,5 +140,5 @@ find $WPROOT -type f -exec chmod 644 {} \;
 
 
 # stop mysql server
-/etc/init.d/mysql stop
+service mysql stop
 
