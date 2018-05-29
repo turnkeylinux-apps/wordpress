@@ -1,5 +1,6 @@
 #include <turnkey/base>
 #include <turnkey/lamp>
+#include <turnkey/php-fpm>
 
 libjs-cropper       /* wordpress dep */
 libjs-jquery        /* wordpress dep */
