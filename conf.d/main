@@ -32,13 +32,14 @@ define('DB_CHARSET', 'utf8');
 define('DB_COLLATE', '');
 
 define('AUTH_KEY', '$(mcookie)$(mcookie)');
-define('AUTH_SALT', '$(mcookie)$(mcookie)');
 define('SECURE_AUTH_KEY', '$(mcookie)$(mcookie)');
-define('SECURE_AUTH_SALT', '$(mcookie)$(mcookie)');
 define('LOGGED_IN_KEY', '$(mcookie)$(mcookie)');
-define('LOGGED_IN_SALT', '$(mcookie)$(mcookie)');
 define('NONCE_KEY', '$(mcookie)$(mcookie)');
+define('AUTH_SALT', '$(mcookie)$(mcookie)');
+define('SECURE_AUTH_SALT', '$(mcookie)$(mcookie)');
+define('LOGGED_IN_SALT', '$(mcookie)$(mcookie)');
 define('NONCE_SALT', '$(mcookie)$(mcookie)');
+
 define('DISABLE_WP_CRON', true);
 
 \$table_prefix  = '$DB_PREFIX';
@@ -110,7 +111,7 @@ php $WPROOT/wp-admin/turnkey-install.php
 rm $WPROOT/wp-admin/turnkey-install.php
 
 # edit first post to include useful information
-mysql --defaults-extra-file=/etc/mysql/debian.cnf <<EOF
+mysql <<EOF
 USE $NAME;
 UPDATE ${DB_PREFIX}posts SET post_title = 'Welcome to WordPress!' WHERE ID = '1';
 UPDATE ${DB_PREFIX}posts SET post_content = 'Getting started...<ul><li><a href="/wp-login.php">Login</a> as <b>admin</b> and get blogging!</li><li>Refer to the <a href="http://www.turnkeylinux.org/wordpress">TurnKey WordPress release notes</a></li><li>Refer to the <a href="http://codex.wordpress.org/Getting_Started_with_WordPress">Wordpress Getting Started Codex</a></li><li>Check out some of the numerous WordPress plugins: <ul>
@@ -136,8 +137,6 @@ EOF
 chown -R www-data:www-data $WPROOT
 find $WPROOT -type d -exec chmod 755 {} \;
 find $WPROOT -type f -exec chmod 644 {} \;
-
-
 
 # stop mysql server
 service mysql stop

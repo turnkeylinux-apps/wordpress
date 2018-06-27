@@ -23,7 +23,7 @@ and on top of that:
      supervision so they **ARE NOT** configured to install automatically.
      See upstream documentation for updating Wordpress major releases.
                
-- Useful and popular Wordpress plugins:
+- Landing page links to useful and popular Wordpress plugins (none pre-installed):
    
    - `Wordpress-SEO`_: Optimizes your WordPress blog for search engines
      and XML sitemaps.
@@ -57,7 +57,7 @@ and on top of that:
   12322 - uses SSL).
 - Postfix MTA (bound to localhost) to allow sending of email (e.g.,
   password recovery).
-- Webmin modules for configuring Apache2, PHP, MySQL and Postfix.
+- Webmin modules for configuring Apache2, PHP, MySQL (MariaDB) and Postfix.
 
 See the `WordPress docs`_ for further details (including multisite
 howto).
@@ -65,7 +65,8 @@ howto).
 Credentials *(passwords set at first boot)*
 -------------------------------------------
 
--  Webmin, SSH, MySQL, Adminer: username **root**
+-  Webmin, SSH, MySQL: username **root**
+-  Adminer: username **adminer**
 -  Wordpress: username **admin**
 
 

@@ -2,14 +2,31 @@ turnkey-wordpress-15.0 (1) turnkey; urgency=low
 
   * Latest version of WordPress
 
+  * conf.d script optimizations.
+    [ Vlad Kuzmenko ]
+
+  * refactored wp-config.php to closer match wp-config-sample.php (closes
+    #1109).
+    [ Jeremy Davis ]
+
   * Install Adminer directly from stretch/main repo
 
-  * Replace MySQL with MariaDB
+  * Provide "adminer" root-like user for Adminer MySQL access
+
+  * Replace MySQL with MariaDB (drop-in MySQL replacement)
+
+  * Updated version of mysqltuner script
+
+  * Includes PHP7.0 (installed from Debian repos)
+
+  * Updated PHP default settings
+
+  * Remove phpsh (no longer maintained)
 
   * Note: Please refer to turnkey-core's changelog for changes common to all
     appliances. Here we only describe changes specific to this appliance.
 
- -- Stefan Davis <stefan@turnkeylinux.org>  Thu, 09 Nov 2017 22:49:52 +1100
+ -- Stefan Davis <stefan@turnkeylinux.org>  Fri, 15 Jun 2018 17:26:35 +1000
 
 turnkey-wordpress-14.2 (1) turnkey; urgency=low
 
