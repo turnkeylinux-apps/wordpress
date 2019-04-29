@@ -1,2 +1,2 @@
 #!/bin/bash
-*/15 * * * * /usr/bin/curl -A 'Mozilla/5.0' 'http://127.0.0.1/wp-cron.php' >/dev/null 2>&1
+*/15 * * * * www-data /usr/bin/curl -A 'Mozilla/5.0' 'http://127.0.0.1/wp-cron.php' >/dev/null 2>&1
