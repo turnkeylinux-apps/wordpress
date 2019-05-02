@@ -2,8 +2,11 @@ turnkey-wordpress-15.2 (1) turnkey; urgency=low
 
   * Rebuild to resolve inadvertant removal of mariadb during sec-updates
     - part of #1246.
+    [ Jeremy Davis ]
 
- -- Jeremy Davis <jeremy@turnkeylinux.org>  Wed, 21 Nov 2018 18:10:51 +1100
+  * Fixed cronjob
+
+ -- Stefan Davis <stefan@turnkeylinux.org>  Mon, 29 Apr 2019 00:17:06 +0000
 
 turnkey-wordpress-15.1 (1) turnkey; urgency=low
 
