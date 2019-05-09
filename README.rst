@@ -23,34 +23,34 @@ and on top of that:
      supervision so they **ARE NOT** configured to install automatically.
      See upstream documentation for updating Wordpress major releases.
                
-- Landing page links to useful and popular Wordpress plugins (none pre-installed):
+- Landing page provides links to `WordPress plugin search`_, plus a number of
+  useful and popular Wordpress plugins (none pre-installed):
    
-   - `Wordpress-SEO`_: Optimizes your WordPress blog for search engines
-     and XML sitemaps.
-   - `NextGEN Gallery`_: Easy to use image gallery with a Flash
-     slideshow option.
-   - `JetPack for WordPress`_: Jetpack adds powerful features previously
+   - `Yost SEO`_: Optimizes your WordPress blog for search engines and XML
+     sitemaps.
+   - `NextGEN Gallery`_: Easy to use image gallery with thumbnail & slideshow
+     options.
+   - `JetPack by WordPress.com`_: Jetpack adds powerful features previously
      only available to WordPress.com users including customization,
      traffic, mobile, content, and performance tools.
    - `WP Super Cache`_: Accelerates your blog by serving 99% of your
      visitors via static HTML files.
-   - `Ultimate Social Media Icons`_: Promote your content by adding links to social sharing
-     and bookmarking sites.
+   - `Social Media Share Buttons & Icons`_: Promote your content by adding
+     links to social sharing and bookmarking sites.
    - `Simple Tags`_: automatically adds tags and related posts to your
      content.
    - `BackupWordPress`_: easily backup your core WordPress tables.
-   - `Google Analytics for WordPress`_: track visitors, AdSense clicks,
-     outgoing links, and search queries.
+   - `Google Analytics Dashboard for WordPress`_: track visitors, AdSense
+     clicks, outgoing links, and search queries.
    - `WP-Polls`_: Adds an easily customizable AJAX poll system to your
      blog.
    - `WP-PageNavi`_: Adds more advanced paging navigation.
    - `Ozh admin dropdown menu`_: Creates a drop down menu with all admin
      links.
-   - `Contact From 7`_: Customizable contact forms supporting AJAX,
+   - `Contact Form 7`_: Customizable contact forms supporting AJAX,
      CAPTCHA and Akismet integration.
-   - `WP-Update-Notifier`_: Sends email to notify you if there are any updates for your
-     WordPress site. Can notify about core, plugin and theme updates.
-   - `Seriously Simple Podcasting`_: Simple Podcasting from your WordPress site.
+   - `Seriously Simple Podcasting`_: Simple Podcasting from your WordPress
+     site.
 
 - SSL support out of the box.
 - `Adminer`_ administration frontend for MySQL (listening on port
@@ -70,21 +70,21 @@ Credentials *(passwords set at first boot)*
 -  Wordpress: username **admin**
 
 
-.. _WordPress: http://wordpress.org
+.. _WordPress: https://wordpress.org
 .. _TurnKey Core: https://www.turnkeylinux.org/core
-.. _Wordpress-SEO: http://yoast.com/wordpress/seo/
-.. _NextGEN Gallery: http://wordpress.org/extend/plugins/nextgen-gallery/
-.. _JetPack for WordPress: http://wordpress.org/extend/plugins/jetpack/
-.. _WP Super Cache: http://wordpress.org/extend/plugins/wp-super-cache/
-.. _Ultimate Social Media Icons: http://wordpress.org/extend/plugins/ultimate-social-media-icons/
-.. _Simple Tags: http://wordpress.org/extend/plugins/simple-tags/
-.. _BackupWordPress: http://wordpress.org/extend/plugins/backupwordpress/
-.. _Google Analytics for WordPress: http://yoast.com/wordpress/google-analytics/
-.. _WP-Polls: http://wordpress.org/extend/plugins/wp-polls/
-.. _WP-Update-Notifier: http://wordpress.org/extend/plugins/wp-updates-notifier/
-.. _WP-PageNavi: http://wordpress.org/extend/plugins/wp-pagenavi/
-.. _Ozh admin dropdown menu: http://wordpress.org/extend/plugins/ozh-admin-drop-down-menu/
-.. _Contact From 7: http://wordpress.org/extend/plugins/contact-form-7/
-.. _Seriously Simple Podcasting: http://wordpress.org/extend/plugins/seriously-simple-podcasting/
-.. _Adminer: http://www.adminer.org/
+.. _WordPress plugin search: https://wordpress.org/plugins/
+.. _Yost SEO: https://wordpress.org/plugins/wordpress-seo/
+.. _NextGEN Gallery: https://wordpress.org/plugins/nextgen-gallery/
+.. _JetPack by WordPress.com: https://wordpress.org/plugins/jetpack/
+.. _WP Super Cache: https://wordpress.org/plugins/wp-super-cache/
+.. _Social Media Share Buttons & Icons: https://wordpress.org/plugins/ultimate-social-media-icons/
+.. _Simple Tags: https://wordpress.org/plugins/simple-tags/
+.. _BackupWordPress: https://wordpress.org/plugins/backupwordpress/
+.. _Google Analytics Dashboard for WordPress: https://wordpress.org/plugins/google-analytics-for-wordpress/
+.. _WP-Polls: https://wordpress.org/plugins/wp-polls/
+.. _WP-PageNavi: http://wordpress.org/plugins/wp-pagenavi/
+.. _Ozh admin dropdown menu: https://wordpress.org/plugins/ozh-admin-drop-down-menu/
+.. _Contact Form 7: https://wordpress.org/plugins/contact-form-7/
+.. _Seriously Simple Podcasting: https://wordpress.org/plugins/seriously-simple-podcasting/
+.. _Adminer: https://www.adminer.org/
 .. _WordPress docs: https://www.turnkeylinux.org/docs/wordpress
