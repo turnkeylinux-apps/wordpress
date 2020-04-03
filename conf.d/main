@@ -40,6 +40,7 @@ define('SECURE_AUTH_SALT', '$(mcookie)$(mcookie)');
 define('LOGGED_IN_SALT', '$(mcookie)$(mcookie)');
 define('NONCE_SALT', '$(mcookie)$(mcookie)');
 
+define('WP_CACHE', true);
 define('DISABLE_WP_CRON', true);
 
 \$table_prefix  = '$DB_PREFIX';
