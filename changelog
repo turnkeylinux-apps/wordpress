@@ -1,3 +1,19 @@
+turnkey-wordpress-16.0 (1) turnkey; urgency=low
+
+  * Update Wordpress to latest upstream version - 5.4.
+
+  * Update WordPress inithook to python3.
+    [ Stefan Davis ]
+
+  * Include wp-cli tool. Closes #293.
+
+  * Enable WP_CACHE by default.
+
+  * Exclude default cache location (/var/www/wordpress/wp-content/cache) from
+    TKLBAM profile. Closes #1411.
+
+ -- Jeremy Davis <jeremy@turnkeylinux.org>  Fri, 03 Apr 2020 17:42:47 +1100
+
 turnkey-wordpress-15.3 (1) turnkey; urgency=low
 
   * Update WordPress to latest upstream version - 5.2.
