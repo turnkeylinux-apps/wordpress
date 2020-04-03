@@ -132,8 +132,13 @@ UPDATE ${DB_PREFIX}posts SET post_content = 'Getting started...<ul><li><a href="
 </ul></li></ul>' WHERE ID = '1';
 EOF
 
-# fix permissions for updates
+# Install wp-cli commandline tool
+wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -O /usr/local/bin/wp
+chmod +x /usr/local/bin/wp
+wget https://raw.githubusercontent.com/wp-cli/wp-cli/v2.4.0/utils/wp-completion.bash -O ~/.bashrc.d/wp-completion
+chmod +x ~/.bashrc.d/wp-completion
 
+# fix permissions for updates
 chown -R www-data:www-data $WPROOT
 find $WPROOT -type d -exec chmod 755 {} \;
 find $WPROOT -type f -exec chmod 644 {} \;
