@@ -58,6 +58,13 @@ define('FS_METHOD', 'direct');
 define('AUTOMATIC_UPDATER_DISABLED', false);
 define('WP_AUTO_UPDATE_CORE', 'minor');
 
+// Workaround wp-cli issue with unset HTTP_HOST
+// For more info  see https://github.com/wp-cli/wp-cli/issues/2431 &/or
+// https://make.wordpress.org/cli/handbook/common-issues/#php-notice-undefined-index-on-_server-superglobal
+if ( defined( 'WP_CLI' ) && WP_CLI && ! isset( \$_SERVER['HTTP_HOST'] ) ) {
+    \$_SERVER['HTTP_HOST'] = 'localhost';
+}
+
 // Single-Site (serves any hostname)
 // For Multi-Site, see: https://www.turnkeylinux.org/docs/wordpress/multisite
 define('WP_SITEURL', 'http://'.\$_SERVER['HTTP_HOST']);
