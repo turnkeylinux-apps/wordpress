@@ -7,12 +7,17 @@ turnkey-wordpress-16.0 (1) turnkey; urgency=low
 
   * Include wp-cli tool. Closes #293.
 
+  * Include 'turnkey-wp' convenience script (leverages runuser to run as
+    www-data and sets --path=/var/www/wordpress).
+
+  * Leverage wp-cli (via turnkey-wp) to regenerate salts on firstboot.
+
   * Enable WP_CACHE by default.
 
   * Exclude default cache location (/var/www/wordpress/wp-content/cache) from
     TKLBAM profile. Closes #1411.
 
- -- Jeremy Davis <jeremy@turnkeylinux.org>  Fri, 03 Apr 2020 17:42:47 +1100
+ -- Jeremy Davis <jeremy@turnkeylinux.org>  Thu, 16 Apr 2020 14:16:10 +1000
 
 turnkey-wordpress-15.3 (1) turnkey; urgency=low
 
