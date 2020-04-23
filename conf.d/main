@@ -40,6 +40,7 @@ define('SECURE_AUTH_SALT', '$(mcookie)$(mcookie)');
 define('LOGGED_IN_SALT', '$(mcookie)$(mcookie)');
 define('NONCE_SALT', '$(mcookie)$(mcookie)');
 
+define('WP_CACHE', true);
 define('DISABLE_WP_CRON', true);
 
 \$table_prefix  = '$DB_PREFIX';
@@ -56,6 +57,13 @@ define('FS_METHOD', 'direct');
 // WordPress update policy
 define('AUTOMATIC_UPDATER_DISABLED', false);
 define('WP_AUTO_UPDATE_CORE', 'minor');
+
+// Workaround wp-cli issue with unset HTTP_HOST
+// For more info  see https://github.com/wp-cli/wp-cli/issues/2431 &/or
+// https://make.wordpress.org/cli/handbook/common-issues/#php-notice-undefined-index-on-_server-superglobal
+if ( defined( 'WP_CLI' ) && WP_CLI && ! isset( \$_SERVER['HTTP_HOST'] ) ) {
+    \$_SERVER['HTTP_HOST'] = 'localhost';
+}
 
 // Single-Site (serves any hostname)
 // For Multi-Site, see: https://www.turnkeylinux.org/docs/wordpress/multisite
@@ -131,8 +139,13 @@ UPDATE ${DB_PREFIX}posts SET post_content = 'Getting started...<ul><li><a href="
 </ul></li></ul>' WHERE ID = '1';
 EOF
 
-# fix permissions for updates
+# Install wp-cli commandline tool
+wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -O /usr/local/bin/wp
+chmod +x /usr/local/bin/wp
+wget https://raw.githubusercontent.com/wp-cli/wp-cli/v2.4.0/utils/wp-completion.bash -O ~/.bashrc.d/wp-completion
+chmod +x ~/.bashrc.d/wp-completion
 
+# fix permissions for updates
 chown -R www-data:www-data $WPROOT
 find $WPROOT -type d -exec chmod 755 {} \;
 find $WPROOT -type f -exec chmod 644 {} \;

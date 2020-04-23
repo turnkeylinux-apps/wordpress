@@ -1,0 +1,10 @@
+#!/bin/bash -e
+
+[[ -z "$DEBUG" ]] || set -x
+
+WP_DIR=${WP_DIR:-/var/www/wordpress}
+WP_USR=${WP_USR:-www-data}
+
+COMMAND="wp --path=$WP_DIR $@"
+
+runuser $WP_USR -s /bin/bash -c "$COMMAND"
