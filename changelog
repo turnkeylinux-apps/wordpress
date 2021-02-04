@@ -1,3 +1,13 @@
+turnkey-wordpress-16.1 (1) turnkey; urgency=low
+
+  * Include additional (optional/recommended) PHP modules (zip & imagick).
+    Closes #1466.
+
+  * Note: Please refer to turnkey-core's 16.1 changelog for changes common to
+    all appliances. Here we only describe changes specific to this appliance.
+
+ -- Jeremy Davis <jeremy@turnkeylinux.org>  Fri, 05 Feb 2021 08:34:13 +1100
+
 turnkey-wordpress-16.0 (1) turnkey; urgency=low
 
   * Update Wordpress to latest upstream version - 5.4.
