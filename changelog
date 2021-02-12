@@ -1,12 +1,19 @@
 turnkey-wordpress-16.1 (1) turnkey; urgency=low
 
+  * Update Wordpress to latest upstream version - 5.6.1.
+
+  * Install via 'wp' CLI tool (using 'turnkey-wp' wrapper script). Closes
+    #1437.
+
   * Include additional (optional/recommended) PHP modules (zip & imagick).
     Closes #1466.
+
+  * Reduce cron job interval to 5 minutes - closes #1323.
 
   * Note: Please refer to turnkey-core's 16.1 changelog for changes common to
     all appliances. Here we only describe changes specific to this appliance.
 
- -- Jeremy Davis <jeremy@turnkeylinux.org>  Fri, 05 Feb 2021 08:34:13 +1100
+ -- Jeremy Davis <jeremy@turnkeylinux.org>  Fri, 12 Feb 2021 16:32:12 +1100
 
 turnkey-wordpress-16.0 (1) turnkey; urgency=low
 
