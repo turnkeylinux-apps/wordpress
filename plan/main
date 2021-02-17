@@ -8,9 +8,11 @@ libjs-scriptaculous /* wordpress dep */
 libphp-phpmailer    /* wordpress dep */
 libphp-snoopy       /* wordpress dep */
 php-gettext         /* wordpress dep */
-php-gd             /* wordpress dep */
+php-gd              /* wordpress dep */
 tinymce             /* wordpress dep */
+php-zip             /* wordpress recommends */
+php-imagick         /* wordpress recommends */
 
-php-curl           /* needed by some plugins */
+php-curl            /* needed by some plugins */
 
 unzip               /* most wordpress plugins and themes are zip archives */

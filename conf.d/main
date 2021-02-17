@@ -1,10 +1,10 @@
 #!/bin/bash -ex
 
 WPROOT=/var/www/wordpress
-CONFIG_FILE=$WPROOT/wp-config.php
 NAME=wordpress
+USER=www-data
 DB_PREFIX=wp_
-DB_PASSWORD=$(mcookie)
+DB_PASS=$(mcookie)
 
 ADMIN_USER=admin
 ADMIN_PASS=turnkey
@@ -17,36 +17,29 @@ sed -i "s|^upload_max_filesize.*|upload_max_filesize = 16M|" $PHPINI
 sed -i "s|^post_max_size.*|post_max_size = 48M|" $PHPINI
 sed -i "s|^allow_url_fopen.*|allow_url_fopen = On|" $PHPINI
 
-# unpack wordpress
-tar -zxf /usr/local/src/latest.tar.gz -C $(dirname $WPROOT)
-rm /usr/local/src/latest.tar.gz
+# Install wp-cli commandline tool
+wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -O /usr/local/bin/wp
+chmod +x /usr/local/bin/wp
+wget https://raw.githubusercontent.com/wp-cli/wp-cli/v2.4.0/utils/wp-completion.bash -O ~/.bashrc.d/wp-completion
+chmod +x ~/.bashrc.d/wp-completion
 
-# write the config file
-cat > $CONFIG_FILE << EOF
-<?php
-define('DB_NAME', '$NAME');
-define('DB_USER', '$NAME');
-define('DB_PASSWORD', '$DB_PASSWORD');
-define('DB_HOST', 'localhost');
-define('DB_CHARSET', 'utf8');
-define('DB_COLLATE', '');
+# create the database and user
+service mysql start
+mysqladmin create $NAME
+mysql --batch --execute "grant all privileges on $NAME.* to $NAME@localhost identified by '$DB_PASS'; flush privileges;"
 
-define('AUTH_KEY', '$(mcookie)$(mcookie)');
-define('SECURE_AUTH_KEY', '$(mcookie)$(mcookie)');
-define('LOGGED_IN_KEY', '$(mcookie)$(mcookie)');
-define('NONCE_KEY', '$(mcookie)$(mcookie)');
-define('AUTH_SALT', '$(mcookie)$(mcookie)');
-define('SECURE_AUTH_SALT', '$(mcookie)$(mcookie)');
-define('LOGGED_IN_SALT', '$(mcookie)$(mcookie)');
-define('NONCE_SALT', '$(mcookie)$(mcookie)');
-
+# install wordpress
+mkdir -p $WPROOT
+chown -R $USER:$USER $WPROOT
+turnkey-wp core download --path=$WPROOT
+cd $WPROOT
+turnkey-wp config create --dbname="$NAME" \
+                         --dbuser="$NAME" \
+                         --dbpass="$DB_PASS" \
+                         --dbprefix="$DB_PREFIX" \
+                         --extra-php <<EOF
 define('WP_CACHE', true);
 define('DISABLE_WP_CRON', true);
-
-\$table_prefix  = '$DB_PREFIX';
-
-// WordPress Localized Language, defaults to English.
-define ('WPLANG', '');
 
 // WordPress debugging mode (for developers).
 define('WP_DEBUG', false);
@@ -69,28 +62,6 @@ if ( defined( 'WP_CLI' ) && WP_CLI && ! isset( \$_SERVER['HTTP_HOST'] ) ) {
 // For Multi-Site, see: https://www.turnkeylinux.org/docs/wordpress/multisite
 define('WP_SITEURL', 'http://'.\$_SERVER['HTTP_HOST']);
 define('WP_HOME', 'http://'.\$_SERVER['HTTP_HOST']);
-
-/* That's all, stop editing! Happy blogging. */
-
-if ( !defined('ABSPATH') )
-        define('ABSPATH', dirname(__FILE__) . '/');
-
-require_once(ABSPATH . 'wp-settings.php');
-EOF
-
-chgrp www-data "${CONFIG_FILE}"
-
-# start mysql server
-service mysql start
-
-# create the database and user
-mysql --defaults-extra-file=/etc/mysql/debian.cnf <<EOF
-CREATE DATABASE $NAME;
-GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,ALTER
-ON $NAME.*
-TO $NAME@localhost
-IDENTIFIED BY '$DB_PASSWORD';
-FLUSH PRIVILEGES;
 EOF
 
 # setup apache configuration and complete wordpress installation
@@ -98,15 +69,14 @@ a2dissite 000-default
 a2ensite wordpress
 a2enmod rewrite
 
+# Install via custom script; wp-cli install requires URL.
 cat >$WPROOT/wp-admin/turnkey-install.php<<EOF
 <?php
 define('WP_INSTALLING', true);
 require_once('$WPROOT/wp-config.php');
 require_once('$WPROOT/wp-admin/includes/upgrade.php');
-
 //install system
 wp_install("TurnKey Linux", '$ADMIN_USER', '$ADMIN_MAIL', 1);
-
 //set admin password to something not random
 \$user = get_userdatabylogin('$ADMIN_USER');
 \$user = add_magic_quotes(get_object_vars(\$user));
@@ -139,12 +109,6 @@ UPDATE ${DB_PREFIX}posts SET post_content = 'Getting started...<ul><li><a href="
 </ul></li></ul>' WHERE ID = '1';
 EOF
 
-# Install wp-cli commandline tool
-wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -O /usr/local/bin/wp
-chmod +x /usr/local/bin/wp
-wget https://raw.githubusercontent.com/wp-cli/wp-cli/v2.4.0/utils/wp-completion.bash -O ~/.bashrc.d/wp-completion
-chmod +x ~/.bashrc.d/wp-completion
-
 # fix permissions for updates
 chown -R www-data:www-data $WPROOT
 find $WPROOT -type d -exec chmod 755 {} \;
@@ -152,4 +116,3 @@ find $WPROOT -type f -exec chmod 644 {} \;
 
 # stop mysql server
 service mysql stop
-
