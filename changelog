@@ -2,8 +2,9 @@ turnkey-wordpress-16.1 (1) turnkey; urgency=low
 
   * Update Wordpress to latest upstream version - 5.6.1.
 
-  * Install via 'wp' CLI tool (using 'turnkey-wp' wrapper script). Closes
-    #1437.
+  * Do most of install via 'wp' CLI tool (aka wp-cli; using 'turnkey-wp'
+    wrapper script). Still uses our custom php install script for final step
+    as wp-cli requires a URL. Closes #1437.
 
   * Include additional (optional/recommended) PHP modules (zip & imagick).
     Closes #1466.
@@ -13,7 +14,7 @@ turnkey-wordpress-16.1 (1) turnkey; urgency=low
   * Note: Please refer to turnkey-core's 16.1 changelog for changes common to
     all appliances. Here we only describe changes specific to this appliance.
 
- -- Jeremy Davis <jeremy@turnkeylinux.org>  Fri, 12 Feb 2021 16:32:12 +1100
+ -- Jeremy Davis <jeremy@turnkeylinux.org>  Wed, 17 Feb 2021 11:35:04 +1100
 
 turnkey-wordpress-16.0 (1) turnkey; urgency=low
 
@@ -52,7 +53,7 @@ turnkey-wordpress-15.3 (1) turnkey; urgency=low
 
 turnkey-wordpress-15.2 (1) turnkey; urgency=low
 
-  * Rebuild to resolve inadvertant removal of mariadb during sec-updates
+  * Rebuild to resolve inadvertent removal of mariadb during sec-updates
     - part of #1246.
     [ Jeremy Davis ]
 
@@ -62,7 +63,7 @@ turnkey-wordpress-15.2 (1) turnkey; urgency=low
 
 turnkey-wordpress-15.1 (1) turnkey; urgency=low
 
-  * Upgraded to lastest WordPress version (v4.9.8).
+  * Upgraded to last est WordPress version (v4.9.8).
 
  -- Jeremy Davis <jeremy@turnkeylinux.org>  Thu, 18 Oct 2018 13:16:12 +1100
 
@@ -132,7 +133,7 @@ turnkey-wordpress-14.0 (1) turnkey; urgency=low
     - Latest upstream version of WordPress and plugins
     - Increased PHP upload and max_posts size limits
     - Made sure all the plugins are downloaded as the latest (stable)upstream version
-    - WordPress can now updat itself and install plugins without asking for FTP credentials
+    - WordPress can now update itself and install plugins without asking for FTP credentials
 
   * Added plugins
   
@@ -143,11 +144,11 @@ turnkey-wordpress-14.0 (1) turnkey; urgency=low
   * Removed plugins
 
     podpress          (removed from WordPress plugin repo)
-    socialable        (no active maintanance)
+    socialable        (no active maintenance)
     stats             (is now merged into jetpack)
     wp-db-backup      (not compatible with WordPress 4)
 
-  * Replaced PHPMyAdmin with Adminer
+  * Replaced phpMyAdmin with Adminer
 
   * Hardened default SSL settings
 
@@ -164,7 +165,7 @@ turnkey-wordpress-13.0 (1) turnkey; urgency=low
       specified below).
     - Increase PHP memory limit [#19].
 
-  * PHPMyAdmin:
+  * phpMyAdmin:
 
     - Configured to allow users preferences stored in database.
     - Specified blowfish_secret and regeneration on firstboot (security).
@@ -194,7 +195,7 @@ turnkey-wordpress-12.1 (1) turnkey; urgency=low
         - Removed akismet (bundled with wordpress installation)
         - Removed maxblogpress-ping-optimizer (deprecated, wp has native support)
         
-  * Added phpsh (interative shell for PHP) and php5-cli (generically useful).
+  * Added phpsh (interactive shell for PHP) and php5-cli (generically useful).
 
   * Upstream source component versions:
 
@@ -267,7 +268,7 @@ turnkey-wordpress-11.1 (1) turnkey; urgency=low
 
   * Set postfix MTA myhostname to localhost (bugfix).
 
-  * Enabled tracking in PHPMyAdmin.
+  * Enabled tracking in phpMyAdmin.
 
   * Major component versions:
 
@@ -324,10 +325,10 @@ turnkey-wordpress-2009.10 (1) hardy; urgency=low
     - Cforms
     - MaxBlogPress ping optimizer
 
-  * PHPMyAdmin improvements:
+  * phpMyAdmin improvements:
 
-    - Added pmadb (linked tables) advanced features to PHPMyAdmin (LP#426303).
-    - Pinned PHPMyAdmin to update directly from Debian (security).
+    - Added pmadb (linked tables) advanced features to phpMyAdmin (LP#426303).
+    - Pinned phpMyAdmin to update directly from Debian (security).
 
   * di-live (installer) MySQL component
 
@@ -362,8 +363,8 @@ turnkey-wordpress-2009.03 (1) hardy; urgency=low
     - permalinks configuration supported through admin console (convenience)
     - automatic plugin upgrades supported (convenience)
     - fixed password reset link bug (Debian #519798)
-    - auto-install security updates directly from debian stable (security)
-    - suppress annoying new version messages (updated directly from debian)
+    - auto-install security updates directly from Debian stable (security)
+    - suppress annoying new version messages (updated directly from Debian)
     - wp_siteurl and wp_home are set automatically using HTTP_HOST
     - welcome post includes useful information and login credentials
 
