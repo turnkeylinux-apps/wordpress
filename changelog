@@ -63,7 +63,7 @@ turnkey-wordpress-15.2 (1) turnkey; urgency=low
 
 turnkey-wordpress-15.1 (1) turnkey; urgency=low
 
-  * Upgraded to last est WordPress version (v4.9.8).
+  * Upgraded to lastest WordPress version (v4.9.8).
 
  -- Jeremy Davis <jeremy@turnkeylinux.org>  Thu, 18 Oct 2018 13:16:12 +1100
 
