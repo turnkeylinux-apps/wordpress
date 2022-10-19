@@ -1,3 +1,19 @@
+turnkey-wordpress-17.0 (1) turnkey; urgency=low
+
+  * Updating wordpress appliance and its dependencies with tkldev to v17.0.
+
+  * Bumping php version to 7.4 debian default in conf.d/main.
+
+  * Bumping wp-cli release version to v2.6.0 .
+
+  * Updating and removing outdated packages  tinymce and php-gettext in
+    plan/main file.
+
+  * Note: Please refer to turnkey-core's 17.0 changelog for changes common to
+    all appliances. Here we only describe changes specific to this appliance.
+
+ -- Mattie Darden <mattie@turnkeylinux.org>  Wed, 12 Oct 2022 12:40:06 -0400
+
 turnkey-wordpress-16.1 (1) turnkey; urgency=low
 
   * Update Wordpress to latest upstream version - 5.6.1.

@@ -7,11 +7,11 @@ libjs-prototype     /* wordpress dep */
 libjs-scriptaculous /* wordpress dep */
 libphp-phpmailer    /* wordpress dep */
 libphp-snoopy       /* wordpress dep */
-php-gettext         /* wordpress dep */
+php-php-gettext     /* wordpress dep */
 php-gd              /* wordpress dep */
-tinymce             /* wordpress dep */
 php-zip             /* wordpress recommends */
 php-imagick         /* wordpress recommends */
+w3m                 /* wordpress recommends */
 
 php-curl            /* needed by some plugins */
 

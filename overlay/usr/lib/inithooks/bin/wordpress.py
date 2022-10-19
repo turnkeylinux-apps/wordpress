@@ -12,7 +12,7 @@ import getopt
 import inithooks_cache
 import hashlib
 
-from dialog_wrapper import Dialog
+from libinithooks.dialog_wrapper import Dialog
 from mysqlconf import MySQL
 
 
