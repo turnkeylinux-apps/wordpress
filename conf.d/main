@@ -11,8 +11,8 @@ ADMIN_PASS=turnkey
 ADMIN_MAIL=admin@example.com
 
 # increase php running limits
-PHPINI=/etc/php/7.4/apache2/php.ini
-sed -i "s|^memory_limit.*|memory_limit = 128M|" $PHPINI
+PHPINI=/etc/php/8.1/apache2/php.ini
+sed -i "s|^memory_limit.*|memory_limit = 256M|" $PHPINI
 sed -i "s|^upload_max_filesize.*|upload_max_filesize = 16M|" $PHPINI
 sed -i "s|^post_max_size.*|post_max_size = 48M|" $PHPINI
 sed -i "s|^allow_url_fopen.*|allow_url_fopen = On|" $PHPINI

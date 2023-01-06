@@ -1,5 +1,5 @@
 #include <turnkey/base>
-#include <turnkey/lamp>
+#include <turnkey/lamp81>
 
 libjs-cropper       /* wordpress dep */
 libjs-jquery        /* wordpress dep */
@@ -8,11 +8,14 @@ libjs-scriptaculous /* wordpress dep */
 libphp-phpmailer    /* wordpress dep */
 libphp-snoopy       /* wordpress dep */
 php-php-gettext     /* wordpress dep */
-php-gd              /* wordpress dep */
-php-zip             /* wordpress recommends */
-php-imagick         /* wordpress recommends */
+php8.1-gd           /* wordpress dep */
+php8.1-zip          /* wordpress recommends */
+php8.1-imagick      /* wordpress recommends */
+php8.1-intl         /* wordpress recommends */
+php8.1-mbstring     /* wordpress recommends */
+php8.1-dom          /* wordpress recommends */
 w3m                 /* wordpress recommends */
 
-php-curl            /* needed by some plugins */
+php8.1-curl         /* needed by some plugins */
 
 unzip               /* most wordpress plugins and themes are zip archives */
