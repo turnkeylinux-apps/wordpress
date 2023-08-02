@@ -11,7 +11,7 @@ ADMIN_PASS=turnkey
 ADMIN_MAIL=admin@example.com
 
 # increase php running limits
-PHPINI=/etc/php/7.4/apache2/php.ini
+PHPINI=/etc/php/8.2/apache2/php.ini
 sed -i "s|^memory_limit.*|memory_limit = 128M|" $PHPINI
 sed -i "s|^upload_max_filesize.*|upload_max_filesize = 16M|" $PHPINI
 sed -i "s|^post_max_size.*|post_max_size = 48M|" $PHPINI
@@ -108,6 +108,8 @@ UPDATE ${DB_PREFIX}posts SET post_content = 'Getting started...<ul><li><a href="
 <li><a href="https://wordpress.org/plugins/seriously-simple-podcasting/">Seriously Simple Podcasting</a>: Simple Podcasting from your WordPress site.</li>
 </ul></li></ul>' WHERE ID = '1';
 EOF
+
+turnkey-wp plugin update --all
 
 # fix permissions for updates
 chown -R www-data:www-data $WPROOT
