@@ -1,4 +1,4 @@
-turnkey-prestashop-18.0 (1) turnkey; urgency=low
+turnkey-wordpress-18.0 (1) turnkey; urgency=low
 
   * Updated to latest upstream WordPress - v6.3.2.
     [ Stefan Davis <stefan@turnkeylinux.org> ]
@@ -70,7 +70,7 @@ turnkey-prestashop-18.0 (1) turnkey; urgency=low
   * Include and enable mod_evasive and mod_security2 by default in Apache.
     [ Stefan Davis <Stefan@turnkeylinux.org> ]
 
- -- Jeremy Davis <jeremy@turnkeylinux.org>  Thu, 19 Oct 2023 04:02:21 +0000
+ -- Jeremy Davis <jeremy@turnkeylinux.org>  Fri, 03 Nov 2023 04:49:07 +0000
 
 turnkey-wordpress-17.1 (1) turnkey; urgency=low
 
