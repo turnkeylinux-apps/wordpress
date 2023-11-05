@@ -1,5 +1,9 @@
 turnkey-wordpress-18.0 (1) turnkey; urgency=low
 
+  * Ensure hashfile includes URL to public key - closes #1864.
+
+  * Include webmin-logviewer module by default - closes #1866.
+
   * Updated to latest upstream WordPress - v6.3.2.
     [ Stefan Davis <stefan@turnkeylinux.org> ]
 
