@@ -23,7 +23,10 @@ def usage(s=None):
     print(__doc__, file=sys.stderr)
     sys.exit(1)
 
+
 def main():
+    opts: list[tuple[str, str]] = []
+
     try:
         opts, args = getopt.gnu_getopt(sys.argv[1:], "h",
                                        ['help', 'pass=', 'email='])
@@ -56,13 +59,14 @@ def main():
             "admin@example.com")
 
     inithooks_cache.write('APP_EMAIL', email)
-    
+
+    assert password is not None
     hashpass = hashlib.md5(password.encode('utf8')).hexdigest()
 
     m = MySQL()
     m.execute('UPDATE wordpress.wp_users SET user_email=\"%s\" WHERE user_nicename=\"admin\";' % email)
     m.execute('UPDATE wordpress.wp_users SET user_pass=\"%s\" WHERE user_nicename=\"admin\";' % hashpass)
 
+
 if __name__ == "__main__":
     main()
-
