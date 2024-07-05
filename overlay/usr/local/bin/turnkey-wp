@@ -13,4 +13,5 @@ chown -R "$WP_USR":"$WP_USR" "$WP_CACHE"
 
 COMMAND="wp --path=$WP_DIR $*"
 
-runuser "$WP_USR" -s /bin/bash -c "$COMMAND"
+runuser "$WP_USR" -s /bin/bash \
+                  -c "wp --path='$WP_DIR' $(printf '%q ' "$@")"
