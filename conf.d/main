@@ -1,11 +1,15 @@
 #!/bin/bash -ex
 
 WPROOT=/var/www/wordpress
-NAME=wordpress
 USER=www-data
-DB_PREFIX=wp_
-DB_PASS=$(mcookie)
 
+DB_USER=wordpress
+DB_NAME=wordpress
+DB_PREFIX=wp_
+#DB_PASS=$(mcookie)
+DB_PASS=turnkey
+
+WP_URL="http://www.example.com"
 ADMIN_USER=admin
 ADMIN_PASS=turnkey
 ADMIN_MAIL=admin@example.com
@@ -25,18 +29,28 @@ chmod +x ~/.bashrc.d/wp-completion
 
 # create the database and user
 service mysql start
-mysqladmin create $NAME
-mysql --batch --execute "grant all privileges on $NAME.* to $NAME@localhost identified by '$DB_PASS'; flush privileges;"
+mysqladmin create $DB_NAME
+mysql --batch --execute "grant all privileges on $DB_NAME.* to $DB_USER@localhost identified by '$DB_PASS'; flush privileges;"
 
 # install wordpress
 mkdir -p $WPROOT
 chown -R $USER:$USER $WPROOT
 turnkey-wp core download --path=$WPROOT
 cd $WPROOT
-turnkey-wp config create --dbname="$NAME" \
-                         --dbuser="$NAME" \
+turnkey-wp config create --dbname="$DB_NAME" \
+                         --dbuser="$DB_NAME" \
                          --dbpass="$DB_PASS" \
-                         --dbprefix="$DB_PREFIX" \
+                         --dbprefix="$DB_PREFIX"
+turnkey-wp core install --url="$URL" \
+                        --title="TurnKey Linux" \
+                        --admin_user="$ADMIN_USER" \
+                        --admin_password="$ADMIN_PASS" \
+                        --admin_email="$ADMIN_MAIL"
+wp db create
+
+### TODO - initial conf setup requires finalisation
+exit 1
+
                          --extra-php <<EOF
 define('WP_CACHE', true);
 define('DISABLE_WP_CRON', true);
@@ -60,8 +74,12 @@ if ( defined( 'WP_CLI' ) && WP_CLI && ! isset( \$_SERVER['HTTP_HOST'] ) ) {
 
 // Single-Site (serves any hostname)
 // For Multi-Site, see: https://www.turnkeylinux.org/docs/wordpress/multisite
-define('WP_SITEURL', 'http://'.\$_SERVER['HTTP_HOST']);
-define('WP_HOME', 'http://'.\$_SERVER['HTTP_HOST']);
+
+### TODO - only add these lines once - configured for build - update via inithook
+//define('WP_SITEURL', 'http://'.\$_SERVER['HTTP_HOST']);
+//define('WP_HOME', 'http://'.\$_SERVER['HTTP_HOST']);
+define('WP_SITEURL', 'http://www.example.com');
+define('WP_HOME', 'http://www.example.com');
 EOF
 
 # setup apache configuration and complete wordpress installation
@@ -110,6 +128,9 @@ UPDATE ${DB_PREFIX}posts SET post_content = 'Getting started...<ul><li><a href="
 EOF
 
 turnkey-wp plugin update --all
+
+# tweak config to remote example.com domain and uncomment $_SERVER['HTTP_HOST']
+sed -i "/example.com/d; /_SERVER/ s|^//||" $WPROOT/wp-config.php
 
 # fix permissions for updates
 chown -R www-data:www-data $WPROOT
