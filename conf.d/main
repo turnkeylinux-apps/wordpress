@@ -10,7 +10,7 @@ DB_PREFIX=wp_
 DB_PASS=turnkey
 
 WP_URL="http://www.example.com"
-ADMIN_USER=admin
+ADMIN_USER="admin"
 ADMIN_PASS=turnkey
 ADMIN_MAIL=admin@example.com
 
