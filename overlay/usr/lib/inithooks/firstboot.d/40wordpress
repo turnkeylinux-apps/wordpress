@@ -6,11 +6,5 @@
 # shellcheck source=/dev/null
 [[ -e $INITHOOKS_CONF ]] && . $INITHOOKS_CONF
 
-# if APP_PASS & APP_EMAIL set, assume preseeded
-if [[ -n "$APP_PASS" ]] && [[ -n "$APP_EMAIL" ]]; then
-    # if APP_DOMAIN not set, don't set domain - see wordpress.py inithook
-    APP_DOMAIN=${APP_DOMAIN:-NONE}
-fi
-
 $INITHOOKS_PATH/bin/wordpress.py --pass="$APP_PASS" --email="$APP_EMAIL" \
                 --domain="$APP_DOMAIN"

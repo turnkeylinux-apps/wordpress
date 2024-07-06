@@ -4,14 +4,7 @@
 Option:
     --pass=     unless provided, will ask interactively
     --email=    unless provided, will ask interactively
-    --domain=   optional
-                - if not provided, empty string, or 'http://' or 'https://'
-                  protocol only (no fqdn), will ask interactively
-                - if 'NONE', no domain will be set
-                - if string with 'http://' or 'https://' prefix, will assume
-                  full url
-                - if string with no 'http://' or 'https://' prefix, will assume
-                  fqdn and add https protocol prefix
+    --domain=   unless provided, will ask interactively
 """
 
 import sys
@@ -23,8 +16,8 @@ import inithooks_cache
 from libinithooks.dialog_wrapper import Dialog
 from mysqlconf import MySQL
 
-# default interactive value is to set no domain/url in wp-config.php
-DEFAULT_DOMAIN = 'NONE'
+
+DEFAULT_DOMAIN = 'http://www.example.com'
 
 
 def usage(s: Optional[str] | getopt.GetoptError = None) -> NoReturn:
@@ -97,19 +90,22 @@ def main():
 
     inithooks_cache.write('APP_EMAIL', email)
 
-    if domain != 'NONE':
-        domain = process_domain(domain)
-        while True:
-            domain = d.get_input(
-                'WordPress domain (optional)',
-                "Enter domain to serve, if no protocol prefix, will assume"
-                " https. Enter 'NONE' to not set a domain",
-                DEFAULT_DOMAIN)
-            domain = process_domain(domain)
-            if not domain:
-                d.error("Domain must be set - or 'NONE'")
-            else:
-                break
+    if not domain:
+        domain = d.get_input(
+            'WordPress domain',
+            "Enter domain to serve WordPress, if no protocol prefix, will"
+            " assume https.",
+            DEFAULT_DOMAIN)
+
+    if not (domain.startswith("http://") or domain.startswith("https://")):
+        domain = f"https://{domain}"
+    domain = domain.rstrip('/')
+    old_domain = inithooks_cache.read('APP_DOMAIN')
+    if not old_domain:
+        old_domain = DEFAULT_DOMAIN
+
+    subprocess.run(['/usr/local/bin/turnkey-wp', 'search-replace',
+                    old_domain, domain])
 
     inithooks_cache.write('APP_DOMAIN', domain)
 
@@ -117,15 +113,8 @@ def main():
     hashpass = hashlib.md5(password.encode('utf8')).hexdigest()
 
     m = MySQL()
-    m.execute('UPDATE wordpress.wp_users'
-              ' SET user_email=\"%s\"'
-              ' WHERE user_nicename=\"admin\";' % email)
-    m.execute('UPDATE wordpress.wp_users'
-              ' SET user_pass=\"%s\"'
-              ' WHERE user_nicename=\"admin\";' % hashpass)
-
-    TODO UPDATE_DOMAIN_HERE!
-
+    m.execute('UPDATE wordpress.wp_users SET user_pass=%s WHERE user_nicename="admin";', (email,))
+    m.execute('UPDATE wordpress.wp_users SET user_email=%s WHERE user_nicename="admin";', (hashpass,))
 
 if __name__ == "__main__":
     main()
