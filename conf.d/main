@@ -37,22 +37,16 @@ turnkey-wp config create --dbname="$DB_NAME" \
                          --dbuser="$DB_NAME" \
                          --dbpass="$DB_PASS" \
                          --dbprefix="$DB_PREFIX"
-turnkey-wp core install --url="$URL" \
+turnkey-wp core install --url="$WP_URL" \
                         --title="TurnKey Linux" \
                         --admin_user="$ADMIN_USER" \
                         --admin_password="$ADMIN_PASS" \
                         --admin_email="$ADMIN_MAIL"
-wp db create
 
-### TODO - initial conf setup requires finalisation
-exit 1
+cat >> $WPROOT/wp-config.php <<EOF
 
-                         --extra-php <<EOF
 define('WP_CACHE', true);
 define('DISABLE_WP_CRON', true);
-
-// WordPress debugging mode (for developers).
-define('WP_DEBUG', false);
 
 // WordPress update method
 define('FS_METHOD', 'direct');
@@ -67,15 +61,6 @@ define('WP_AUTO_UPDATE_CORE', 'minor');
 if ( defined( 'WP_CLI' ) && WP_CLI && ! isset( \$_SERVER['HTTP_HOST'] ) ) {
     \$_SERVER['HTTP_HOST'] = 'localhost';
 }
-
-// Single-Site (serves any hostname)
-// For Multi-Site, see: https://www.turnkeylinux.org/docs/wordpress/multisite
-
-### TODO - only add these lines once - configured for build - update via inithook
-//define('WP_SITEURL', 'http://'.\$_SERVER['HTTP_HOST']);
-//define('WP_HOME', 'http://'.\$_SERVER['HTTP_HOST']);
-define('WP_SITEURL', 'http://www.example.com');
-define('WP_HOME', 'http://www.example.com');
 EOF
 
 # setup apache configuration and complete wordpress installation
@@ -83,28 +68,9 @@ a2dissite 000-default
 a2ensite wordpress
 a2enmod rewrite
 
-# Install via custom script; wp-cli install requires URL.
-cat >$WPROOT/wp-admin/turnkey-install.php<<EOF
-<?php
-define('WP_INSTALLING', true);
-require_once('$WPROOT/wp-config.php');
-require_once('$WPROOT/wp-admin/includes/upgrade.php');
-//install system
-wp_install("TurnKey Linux", '$ADMIN_USER', '$ADMIN_MAIL', 1);
-//set admin password to something not random
-\$user = get_userdatabylogin('$ADMIN_USER');
-\$user = add_magic_quotes(get_object_vars(\$user));
-\$user['user_pass'] = '$ADMIN_PASS';
-wp_update_user(\$user);
-?>
-EOF
-
-php $WPROOT/wp-admin/turnkey-install.php
-rm $WPROOT/wp-admin/turnkey-install.php
-
 # edit first post to include useful information
 mysql <<EOF
-USE $NAME;
+USE $DB_NAME;
 UPDATE ${DB_PREFIX}posts SET post_title = 'Welcome to WordPress!' WHERE ID = '1';
 UPDATE ${DB_PREFIX}posts SET post_content = 'Getting started...<ul><li><a href="/wp-login.php">Login</a> as <b>admin</b> and get blogging!</li><li>Refer to the <a href="http://www.turnkeylinux.org/wordpress">TurnKey WordPress release notes</a></li><li>Refer to the <a href="http://codex.wordpress.org/Getting_Started_with_WordPress">Wordpress Getting Started Codex</a></li><li><a href="https://wordpress.org/plugins/">Search WordPress.org for plugins</a> to extend WordPress. Here\'s some examples: <ul>
 <li><a href="https://wordpress.org/plugins/wordpress-seo/">Yoast SEO</a>: Optimizes your WordPress blog for search engines and XML sitemaps.</li>
@@ -124,9 +90,6 @@ UPDATE ${DB_PREFIX}posts SET post_content = 'Getting started...<ul><li><a href="
 EOF
 
 turnkey-wp plugin update --all
-
-# tweak config to remote example.com domain and uncomment $_SERVER['HTTP_HOST']
-sed -i "/example.com/d; /_SERVER/ s|^//||" $WPROOT/wp-config.php
 
 # fix permissions for updates
 chown -R www-data:www-data $WPROOT
