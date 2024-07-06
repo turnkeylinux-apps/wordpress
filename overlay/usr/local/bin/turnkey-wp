@@ -7,10 +7,9 @@ WP_USR=${WP_USR:-www-data}
 WP_CACHE=${WP_CACHE:-/var/www/.wp-cli}
 
 if [[ ! -d "$WP_CACHE" ]]; then
-    mkdir -p $WP_CACHE
+    mkdir -p "$WP_CACHE"
 fi
-chown -R $WP_USR:$WP_USR $WP_CACHE
+chown -R "$WP_USR":"$WP_USR" "$WP_CACHE"
 
-COMMAND="wp --path=$WP_DIR $@"
-
-runuser $WP_USR -s /bin/bash -c "$COMMAND"
+runuser "$WP_USR" -s /bin/bash \
+                  -c "/usr/local/bin/wp --path='$WP_DIR' $(printf '%q ' "$@")"
