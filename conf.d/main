@@ -14,12 +14,8 @@ ADMIN_USER=admin
 ADMIN_PASS=turnkey
 ADMIN_MAIL=admin@example.com
 
-# increase php running limits
-PHPINI=/etc/php/8.2/apache2/php.ini
-sed -i "s|^memory_limit.*|memory_limit = 128M|" $PHPINI
-sed -i "s|^upload_max_filesize.*|upload_max_filesize = 16M|" $PHPINI
-sed -i "s|^post_max_size.*|post_max_size = 48M|" $PHPINI
-sed -i "s|^allow_url_fopen.*|allow_url_fopen = On|" $PHPINI
+# update php conf - see Makefile for others
+sed -i "s|^allow_url_fopen.*|allow_url_fopen = On|" /etc/php/?.?/apache2/php.ini
 
 # Install wp-cli commandline tool
 wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -O /usr/local/bin/wp
