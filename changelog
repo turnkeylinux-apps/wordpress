@@ -2,18 +2,27 @@ turnkey-wordpress-18.1 (1) turnkey; urgency=low
 
   * Update WordPress to latest upstream - v6.5.4.
 
+  * Require WordPress domain to be set - resolves some weird asset loading
+    problems.
+
+  * Improve turnkey-wp wp-cli wrapper/helper script to resolve some edge case
+    failures.
+
   * Rebuild for v18.1 - including more recent v18.0 common bugfixes & latest
     Debian packages.
 
-  * Confconsole: bugfix broken DNS-01 Let's Encrypt challenge- closes #1876 &
-    #1895.
-    [Jeremy Davis <jeremy@turnkeylinux.org>]
+  * Configuration console (confconsole) - v2.1.6:
+    - Bugfix broken DNS-01 Let's Encrypt challenge - closes #1876 & #1895.
+      Fixed in v2.1.5.
+    - Let's Encrypt/Dehydrated - bugfix cron failure - closes #1962.
+    - General dehydrated-wrapper code cleanup - now passes shellcheck
 
   * Ensure hashfile includes URL to public key - closes #1864.
 
   * Include webmin-logviewer module by default - closes #1866.
 
   * Web management console (webmin):
+    - Include webmin-logviewer module by default - closes #1866.
     - Upgraded webmin to v2.105.
     - Replace webmin-shell with webmin-xterm module by default - closes #1904.
 
@@ -25,7 +34,7 @@ turnkey-wordpress-18.1 (1) turnkey; urgency=low
     php.ini via appliance Makefile (PHP_MAX_EXECUTION_TIME &
     PHP_MAX_INPUT_VARS).
 
- -- Jeremy Davis <jeremy@turnkeylinux.org>  Fri, 21 Jun 2024 05:43:55 +0000
+ -- Jeremy Davis <jeremy@turnkeylinux.org>  Sat, 06 Jul 2024 13:13:55 +0000
 
 turnkey-wordpress-18.0 (1) turnkey; urgency=low
 
