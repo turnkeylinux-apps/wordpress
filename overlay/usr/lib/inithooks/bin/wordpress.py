@@ -32,25 +32,6 @@ def usage(s: Optional[str] | getopt.GetoptError = None) -> NoReturn:
     sys.exit(exit_code)
 
 
-def process_domain(domain: Optional[str]) -> str:
-    if domain is None:
-        return ''
-    domain = domain.strip()
-    if domain == 'NONE':
-        return domain
-    if domain == ("http://"):
-        domain = domain[7:]
-    elif domain == ("https://"):
-        domain = domain[8:]
-    domain.strip("/")
-    if not domain:
-        return ''
-    if domain.startswith("http://") or domain.startswith("https://"):
-        return domain
-    else:
-        return f"https://{domain}"
-
-
 def main():
     opts: list[tuple[str, str]] = []
 
