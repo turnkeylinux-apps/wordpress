@@ -19,8 +19,6 @@ turnkey-wordpress-18.1 (1) turnkey; urgency=low
 
   * Ensure hashfile includes URL to public key - closes #1864.
 
-  * Include webmin-logviewer module by default - closes #1866.
-
   * Web management console (webmin):
     - Include webmin-logviewer module by default - closes #1866.
     - Upgraded webmin to v2.105.
