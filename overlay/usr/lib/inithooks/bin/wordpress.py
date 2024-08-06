@@ -95,8 +95,8 @@ def main():
     hashpass = hashlib.md5(password.encode('utf8')).hexdigest()
 
     m = MySQL()
-    m.execute('UPDATE wordpress.wp_users SET user_pass=%s WHERE user_nicename="admin";', (email,))
-    m.execute('UPDATE wordpress.wp_users SET user_email=%s WHERE user_nicename="admin";', (hashpass,))
+    m.execute('UPDATE wordpress.wp_users SET user_pass=%s WHERE user_nicename="admin";', (hashpass,))
+    m.execute('UPDATE wordpress.wp_users SET user_email=%s WHERE user_nicename="admin";', (email,))
 
 
 if __name__ == "__main__":
