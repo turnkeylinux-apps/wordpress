@@ -1,3 +1,13 @@
+turnkey-wordpress-18.2 (1) turnkey; urgency=low
+
+  * Update WordPress to latest upstream - v6.6.1.
+
+  * Fix wp admin login - set email and password properly on firstboot - closes
+    #1976.
+    [Andrew Yu <andrewyu.au@gmail.com>]
+
+ -- Jeremy Davis <jeremy@turnkeylinux.org>  Thu, 15 Aug 2024 22:33:08 +0000
+
 turnkey-wordpress-18.1 (1) turnkey; urgency=low
 
   * Update WordPress to latest upstream - v6.5.4.
