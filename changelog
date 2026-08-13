@@ -1,3 +1,12 @@
+turnkey-wordpress-19.0 (1) turnkey; urgency=low
+
+  * Update WordPress to latest upstream - v6.7.2.
+
+  * Rebuild for v19.0 - including more recent v19.0 common bugfixes & latest
+    Debian packages.
+
+ -- Stefan Davis <nafets.sivad@gmail.com>  Tue, 17 Feb 2026 01:11:49 +0000
+
 turnkey-wordpress-18.2 (1) turnkey; urgency=low
 
   * Update WordPress to latest upstream - v6.6.1.
