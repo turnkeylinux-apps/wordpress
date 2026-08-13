@@ -14,7 +14,7 @@ from typing import Optional, NoReturn
 import subprocess
 
 import inithooks_cache
-from libinithooks.dialog_wrapper import Dialog
+from libinithooks.dialog_wrapper import Dialog, validate_domain
 from mysqlconf import MySQL
 
 
@@ -72,16 +72,24 @@ def main():
 
     inithooks_cache.write('APP_EMAIL', email)
 
+    scheme = 'https'
+
     if not domain:
-        domain = d.get_input(
+        scheme, domain = d.get_domain(
             'WordPress domain',
             "Enter domain to serve WordPress, if no protocol prefix, will"
             " assume https.",
             DEFAULT_DOMAIN)
+    else:
+        scheme, domain, message = validate_domain(domain)
+        if message:
+            # nothing we can do, we should just pass it forward even though it's not valid
+            pass
 
-    if not (domain.startswith("http://") or domain.startswith("https://")):
-        domain = f"https://{domain}"
-    domain = domain.rstrip('/')
+    if scheme not in ('http', 'https'):
+        scheme = 'https'
+
+    domain = f"{scheme}://{domain}"
     old_domain = inithooks_cache.read('APP_DOMAIN')
     if not old_domain:
         old_domain = DEFAULT_DOMAIN
