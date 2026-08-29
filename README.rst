@@ -18,10 +18,13 @@ and on top of that:
    - Uploading of media such as images, videos, etc.
    - Permalinks configuration supported through admin console
      (convenience)
-   - Automatic minor updates are supported (convenience).
-   - **Security note**: Major updates to wordpress may require
-     supervision so they **ARE NOT** configured to install automatically.
-     See upstream documentation for updating Wordpress major releases.
+   - Plugin and theme management remains available through WordPress. These
+     directories intentionally contain web-writable executable code; install
+     only updates and extensions you trust.
+   - WordPress core is root-owned and does not update automatically. Apply a
+     supervised core update as ``root`` with ``turnkey-wordpress-update``.
+     The command verifies official WordPress core checksums and restores the
+     appliance ownership boundary after updating.
                
 - Landing page provides links to `WordPress plugin search`_, plus a number of
   useful and popular Wordpress plugins (none pre-installed):

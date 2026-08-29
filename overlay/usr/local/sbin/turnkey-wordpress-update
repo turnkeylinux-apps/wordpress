@@ -1,0 +1,24 @@
+#!/bin/bash
+set -euo pipefail
+
+WPROOT=/var/www/wordpress
+USER=www-data
+
+test "$(id -u)" -eq 0 || {
+    echo "turnkey-wordpress-update must run as root" >&2
+    exit 1
+}
+
+/usr/local/bin/wp --allow-root --path="$WPROOT" core update
+/usr/local/bin/wp --allow-root --path="$WPROOT" core verify-checksums
+
+chown -R root:root "$WPROOT"
+find "$WPROOT" -type d -exec chmod 0755 {} +
+find "$WPROOT" -type f -exec chmod 0644 {} +
+for runtime_dir in uploads cache upgrade plugins themes; do
+    install -d -o "$USER" -g "$USER" -m 0755 \
+        "$WPROOT/wp-content/$runtime_dir"
+    chown -R "$USER:$USER" "$WPROOT/wp-content/$runtime_dir"
+done
+chown root:"$USER" "$WPROOT/wp-config.php"
+chmod 0640 "$WPROOT/wp-config.php"
