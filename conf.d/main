@@ -3,6 +3,7 @@
 WPROOT=/var/www/wordpress
 USER=www-data
 WP_VERSION=7.1
+WP_ARCHIVE_SHA256=d1ae02b5ae18428031ffc3943659fa87ab361d827f4aa804adf9276e4dc75df6
 WP_CLI_VERSION=2.12.0
 WP_CLI_SHA256=ce34ddd838f7351d6759068d09793f26755463b4a4610a5a5c0a97b68220d85c
 WP_COMPLETION_SHA256=443ca0610ccae8d2d6aceba0ec4aa7929b87ed6cf54f666afed18d663a18a395
@@ -42,7 +43,14 @@ mysql --batch --execute "grant all privileges on $DB_NAME.* to $DB_USER@localhos
 # install wordpress
 mkdir -p $WPROOT
 chown -R $USER:$USER $WPROOT
-turnkey-wp core download --path=$WPROOT --version=$WP_VERSION
+WP_ARCHIVE=/usr/local/src/wordpress-${WP_VERSION}.zip
+curl --proto '=https' --tlsv1.2 -fL \
+    "https://wordpress.org/wordpress-${WP_VERSION}.zip" \
+    -o "$WP_ARCHIVE"
+echo "$WP_ARCHIVE_SHA256  $WP_ARCHIVE" | sha256sum --check --strict
+unzip -q "$WP_ARCHIVE" -d "$(dirname "$WPROOT")"
+rm -f "$WP_ARCHIVE"
+chown -R "$USER:$USER" "$WPROOT"
 turnkey-wp core verify-checksums --version=$WP_VERSION
 cd $WPROOT
 turnkey-wp config create --dbname="$DB_NAME" \
