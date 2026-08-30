@@ -86,6 +86,7 @@ def main():
             print(f"Invalid WordPress domain: {message}", file=sys.stderr)
             sys.exit(1)
 
+    scheme = scheme or 'https'
     if scheme not in ('http', 'https'):
         print(f"Unsupported WordPress URL scheme: {scheme}", file=sys.stderr)
         sys.exit(1)
