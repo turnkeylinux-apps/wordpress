@@ -81,7 +81,7 @@ def main():
             " assume https.",
             DEFAULT_DOMAIN)
     else:
-        scheme, domain, message = validate_domain(domain)
+        domain, scheme, message = validate_domain(domain)
         if message:
             print(f"Invalid WordPress domain: {message}", file=sys.stderr)
             sys.exit(1)
