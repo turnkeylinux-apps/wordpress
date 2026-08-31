@@ -2,6 +2,11 @@
 
 WPROOT=/var/www/wordpress
 USER=www-data
+WP_VERSION=7.1
+WP_ARCHIVE_SHA256=d1ae02b5ae18428031ffc3943659fa87ab361d827f4aa804adf9276e4dc75df6
+WP_CLI_VERSION=2.12.0
+WP_CLI_SHA256=ce34ddd838f7351d6759068d09793f26755463b4a4610a5a5c0a97b68220d85c
+WP_COMPLETION_SHA256=443ca0610ccae8d2d6aceba0ec4aa7929b87ed6cf54f666afed18d663a18a395
 
 DB_USER=wordpress
 DB_NAME=wordpress
@@ -18,10 +23,17 @@ ADMIN_MAIL=admin@example.com
 sed -i "s|^allow_url_fopen.*|allow_url_fopen = On|" /etc/php/?.?/apache2/php.ini
 
 # Install wp-cli commandline tool
-wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -O /usr/local/bin/wp
+curl --proto '=https' --tlsv1.2 -fL \
+    "https://github.com/wp-cli/wp-cli/releases/download/v${WP_CLI_VERSION}/wp-cli-${WP_CLI_VERSION}.phar" \
+    -o /usr/local/bin/wp
+echo "$WP_CLI_SHA256  /usr/local/bin/wp" | sha256sum --check --strict
 chmod +x /usr/local/bin/wp
-wget https://raw.githubusercontent.com/wp-cli/wp-cli/v2.6.0/utils/wp-completion.bash -O ~/.bashrc.d/wp-completion
-chmod +x ~/.bashrc.d/wp-completion
+curl --proto '=https' --tlsv1.2 -fL \
+    "https://raw.githubusercontent.com/wp-cli/wp-cli/v${WP_CLI_VERSION}/utils/wp-completion.bash" \
+    -o /root/.bashrc.d/wp-completion
+echo "$WP_COMPLETION_SHA256  /root/.bashrc.d/wp-completion" \
+    | sha256sum --check --strict
+chmod +x /root/.bashrc.d/wp-completion
 
 # create the database and user
 service mysql start
@@ -31,7 +43,15 @@ mysql --batch --execute "grant all privileges on $DB_NAME.* to $DB_USER@localhos
 # install wordpress
 mkdir -p $WPROOT
 chown -R $USER:$USER $WPROOT
-turnkey-wp core download --path=$WPROOT
+WP_ARCHIVE=/usr/local/src/wordpress-${WP_VERSION}.zip
+curl --proto '=https' --tlsv1.2 -fL \
+    "https://wordpress.org/wordpress-${WP_VERSION}.zip" \
+    -o "$WP_ARCHIVE"
+echo "$WP_ARCHIVE_SHA256  $WP_ARCHIVE" | sha256sum --check --strict
+unzip -q "$WP_ARCHIVE" -d "$(dirname "$WPROOT")"
+rm -f "$WP_ARCHIVE"
+chown -R "$USER:$USER" "$WPROOT"
+turnkey-wp core verify-checksums --version=$WP_VERSION
 cd $WPROOT
 turnkey-wp config create --dbname="$DB_NAME" \
                          --dbuser="$DB_NAME" \
@@ -53,7 +73,7 @@ define('FS_METHOD', 'direct');
 
 // WordPress update policy
 define('AUTOMATIC_UPDATER_DISABLED', false);
-define('WP_AUTO_UPDATE_CORE', 'minor');
+define('WP_AUTO_UPDATE_CORE', false);
 
 // Workaround wp-cli issue with unset HTTP_HOST
 // For more info  see https://github.com/wp-cli/wp-cli/issues/2431 &/or
@@ -89,12 +109,18 @@ UPDATE ${DB_PREFIX}posts SET post_content = 'Getting started...<ul><li><a href="
 </ul></li></ul>' WHERE ID = '1';
 EOF
 
-turnkey-wp plugin update --all
-
-# fix permissions for updates
-chown -R www-data:www-data $WPROOT
-find $WPROOT -type d -exec chmod 755 {} \;
-find $WPROOT -type f -exec chmod 644 {} \;
+# Root owns WordPress core and configuration. The web service retains only the
+# documented media and plugin/theme management boundary.
+chown -R root:root "$WPROOT"
+find "$WPROOT" -type d -exec chmod 0755 {} +
+find "$WPROOT" -type f -exec chmod 0644 {} +
+for runtime_dir in uploads cache upgrade plugins themes; do
+    install -d -o "$USER" -g "$USER" -m 0755 \
+        "$WPROOT/wp-content/$runtime_dir"
+    chown -R "$USER:$USER" "$WPROOT/wp-content/$runtime_dir"
+done
+chown root:"$USER" "$WPROOT/wp-config.php"
+chmod 0640 "$WPROOT/wp-config.php"
 
 # stop mysql server
 service mysql stop

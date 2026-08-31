@@ -81,13 +81,15 @@ def main():
             " assume https.",
             DEFAULT_DOMAIN)
     else:
-        scheme, domain, message = validate_domain(domain)
+        domain, scheme, message = validate_domain(domain)
         if message:
-            # nothing we can do, we should just pass it forward even though it's not valid
-            pass
+            print(f"Invalid WordPress domain: {message}", file=sys.stderr)
+            sys.exit(1)
 
+    scheme = scheme or 'https'
     if scheme not in ('http', 'https'):
-        scheme = 'https'
+        print(f"Unsupported WordPress URL scheme: {scheme}", file=sys.stderr)
+        sys.exit(1)
 
     domain = f"{scheme}://{domain}"
     old_domain = inithooks_cache.read('APP_DOMAIN')
@@ -95,7 +97,7 @@ def main():
         old_domain = DEFAULT_DOMAIN
 
     subprocess.run(['/usr/local/bin/turnkey-wp', 'search-replace',
-                    old_domain, domain])
+                    old_domain, domain], check=True)
 
     inithooks_cache.write('APP_DOMAIN', domain)
 
