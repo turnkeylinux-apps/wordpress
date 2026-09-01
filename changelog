@@ -1,5 +1,7 @@
 turnkey-wordpress-19.0 (1) turnkey; urgency=low
 
+  * Ensure MariaDB is running before WordPress firstboot configuration.
+
   * Update WordPress to latest upstream - v7.0.4.
 
   * Upgraded base distribution to Debian 13.x/Trixie.

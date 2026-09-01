@@ -6,5 +6,7 @@
 # shellcheck source=/dev/null
 [[ -e $INITHOOKS_CONF ]] && . $INITHOOKS_CONF
 
+systemctl start mariadb.service
+
 $INITHOOKS_PATH/bin/wordpress.py --pass="$APP_PASS" --email="$APP_EMAIL" \
                 --domain="$APP_DOMAIN"
