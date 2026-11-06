@@ -9,6 +9,12 @@ test "$(id -u)" -eq 0 || {
     exit 1
 }
 
+if [[ -L "$WPROOT/.htaccess" ||
+      ( -e "$WPROOT/.htaccess" && ! -f "$WPROOT/.htaccess" ) ]]; then
+    echo "WordPress .htaccess must be a regular file or absent" >&2
+    exit 1
+fi
+
 /usr/local/bin/wp --allow-root --path="$WPROOT" core update
 /usr/local/bin/wp --allow-root --path="$WPROOT" core verify-checksums
 
@@ -22,3 +28,8 @@ for runtime_dir in uploads cache upgrade plugins themes; do
 done
 chown root:"$USER" "$WPROOT/wp-config.php"
 chmod 0640 "$WPROOT/wp-config.php"
+
+# Keep permalink changes available without replacing merchant rewrite rules.
+touch "$WPROOT/.htaccess"
+chown "$USER:$USER" "$WPROOT/.htaccess"
+chmod 0644 "$WPROOT/.htaccess"

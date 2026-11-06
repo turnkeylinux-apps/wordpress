@@ -17,7 +17,8 @@ and on top of that:
      WordPress' creator Automattic.
    - Uploading of media such as images, videos, etc.
    - Permalinks configuration supported through admin console
-     (convenience)
+     (convenience). WordPress manages its existing ``.htaccess`` rewrite file;
+     the application root directory and core files remain root-owned.
    - Plugin and theme management remains available through WordPress. These
      directories intentionally contain web-writable executable code; install
      only updates and extensions you trust.
@@ -71,6 +72,30 @@ Credentials *(passwords set at first boot)*
 -  Webmin, SSH, MySQL: username **root**
 -  Adminer: username **adminer**
 -  Wordpress: username **admin**
+
+Repair permalink configuration on an existing installation
+---------------------------------------------------------
+
+If saving Settings > Permalinks reports that ``.htaccess`` is not writable,
+run these commands as ``root`` to provide WordPress with its rewrite file::
+
+    rewrite_file=/var/www/wordpress/.htaccess
+    if test -L "$rewrite_file" || { test -e "$rewrite_file" && ! test -f "$rewrite_file"; }; then
+        printf '%s\n' 'Resolve the non-regular .htaccess file before continuing.' >&2
+    else
+        touch "$rewrite_file"
+        chown www-data:www-data "$rewrite_file"
+        chmod 0644 "$rewrite_file"
+    fi
+
+Then save the desired structure again in Settings > Permalinks. Existing file
+contents are preserved. Use the corrected ``turnkey-wordpress-update`` script
+from this source checkout for future core updates, because the older script
+returns the rewrite file to root ownership::
+
+    install -o root -g root -m 0755 \
+      overlay/usr/local/sbin/turnkey-wordpress-update \
+      /usr/local/sbin/turnkey-wordpress-update
 
 
 .. _WordPress: https://wordpress.org

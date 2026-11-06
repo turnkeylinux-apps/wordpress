@@ -44,6 +44,41 @@ test -n "$post_id"
 test "$(turnkey-wp post get "$post_id" --field=post_content)" = \
     qa-wordpress-persistence
 
+# Configure permalinks through the authenticated settings form. CLI post CRUD
+# alone bypasses the rewrite rules needed by public URLs and the block editor.
+htaccess=/var/www/wordpress/.htaccess
+test "$(stat -c '%U:%G %a' "$htaccess")" = 'www-data:www-data 644'
+runuser -u www-data -- test -w "$htaccess"
+runuser -u www-data -- test ! -w /var/www/wordpress
+printf '\n# TurnKey permalink regression\n' | \
+    runuser -u www-data -- tee -a "$htaccess" >/dev/null
+curl "${curl_args[@]}" -b "$work/cookies" \
+    "${admin_url}options-permalink.php" >"$work/permalink-form.html"
+nonce=$(python3 - "$work/permalink-form.html" <<'PY'
+import re, sys
+page = open(sys.argv[1]).read()
+match = re.search(r'name="_wpnonce" value="([^"]+)"', page)
+assert match, 'permalink settings nonce missing'
+print(match.group(1))
+PY
+)
+curl "${curl_args[@]}" -L -b "$work/cookies" \
+    --data-urlencode "_wpnonce=$nonce" \
+    --data-urlencode 'selection=/%postname%/' \
+    --data-urlencode 'permalink_structure=/%postname%/' \
+    "${admin_url}options-permalink.php" >"$work/permalink-saved.html"
+grep -Fq 'Permalink structure updated.' "$work/permalink-saved.html"
+! grep -Fq 'You should update your .htaccess file now' "$work/permalink-saved.html"
+grep -Fq '# TurnKey permalink regression' "$htaccess"
+grep -Fq '# BEGIN WordPress' "$htaccess"
+post_url=$(turnkey-wp eval "echo get_permalink($post_id);")
+curl "${curl_args[@]}" "$post_url" >"$work/pretty-post.html"
+grep -Fq qa-wordpress-persistence "$work/pretty-post.html"
+curl "${curl_args[@]}" "$base/wp-json/wp/v2/posts/$post_id" \
+    >"$work/rest-post.json"
+python3 -c 'import json,sys; assert json.load(open(sys.argv[1]))["id"] == int(sys.argv[2])' \
+    "$work/rest-post.json" "$post_id"
+
 before=$(turnkey-wp core version)
 turnkey-wp core check-update --format=json >"$work/update.json"
 python3 -c 'import json,sys; assert isinstance(json.load(open(sys.argv[1])), list)' \
@@ -88,7 +123,7 @@ done
 cat >"$result" <<EOF
 package_source=official WordPress 7.1 archive pinned by SHA-256
 installed_version=$before
-runtime_checks=firstboot, domain validation, administrator authentication, post persistence and authenticated session across restart, updater metadata, core checksums, ownership boundaries, and secret log hygiene
+runtime_checks=firstboot, domain validation, administrator authentication, permalink settings and public/REST routes, custom rewrite comment preservation, post persistence and authenticated session across restart, updater metadata, core checksums, ownership boundaries, and secret log hygiene
 updater_command=turnkey-wp core check-update --format=json; turnkey-wordpress-update as root
 updater_result=valid update JSON, installed version unchanged, and non-root updater use fails closed
 updater_channel=official WordPress stable release channel

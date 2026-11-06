@@ -109,8 +109,8 @@ UPDATE ${DB_PREFIX}posts SET post_content = 'Getting started...<ul><li><a href="
 </ul></li></ul>' WHERE ID = '1';
 EOF
 
-# Root owns WordPress core and configuration. The web service retains only the
-# documented media and plugin/theme management boundary.
+# Root owns WordPress core and credentials. The web service manages content,
+# extensions and its existing rewrite file, without write access to the root.
 chown -R root:root "$WPROOT"
 find "$WPROOT" -type d -exec chmod 0755 {} +
 find "$WPROOT" -type f -exec chmod 0644 {} +
@@ -121,6 +121,10 @@ for runtime_dir in uploads cache upgrade plugins themes; do
 done
 chown root:"$USER" "$WPROOT/wp-config.php"
 chmod 0640 "$WPROOT/wp-config.php"
+
+touch "$WPROOT/.htaccess"
+chown "$USER:$USER" "$WPROOT/.htaccess"
+chmod 0644 "$WPROOT/.htaccess"
 
 # stop mysql server
 service mysql stop
