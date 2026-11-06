@@ -87,6 +87,7 @@ python3 -c 'import json,sys; assert json.load(open(sys.argv[1]))["id"] == int(sy
     "$work/rest-post.json" "$post_id"
 
 before=$(turnkey-wp core version)
+test "$before" = 7.1.4
 turnkey-wp core check-update --format=json >"$work/update.json"
 python3 -c 'import json,sys; assert isinstance(json.load(open(sys.argv[1])), list)' \
     "$work/update.json"
@@ -128,11 +129,11 @@ for key in AUTH_KEY SECURE_AUTH_KEY LOGGED_IN_KEY NONCE_KEY \
 done
 
 cat >"$result" <<EOF
-package_source=official WordPress 7.1 archive pinned by SHA-256
+package_source=official WordPress 7.1.4 archive pinned by SHA-256
 installed_version=$before
 runtime_checks=firstboot, domain validation, initial site email and custom email preservation, administrator authentication, installed RSS parser, permalink settings and public/REST routes, custom rewrite comment preservation, post persistence and authenticated session across restart, updater metadata, core checksums, ownership boundaries, and secret log hygiene
 updater_command=turnkey-wp core check-update --format=json; turnkey-wordpress-update as root
 updater_result=valid update JSON, installed version unchanged, and non-root updater use fails closed
 updater_channel=official WordPress stable release channel
-integrity_evidence=WordPress 7.1 archive SHA-256 d1ae02b5ae18428031ffc3943659fa87ab361d827f4aa804adf9276e4dc75df6 plus official per-file core checksums
+integrity_evidence=WordPress 7.1.4 archive SHA-256 a147146c159362778ecbbbfb07bb20ddf4e85b130f971c824e656a8f938c5f87 plus official per-file core checksums
 EOF
