@@ -114,7 +114,7 @@ test "$(turnkey-wp post get "$post_id" --field=post_content)" = \
 curl "${curl_args[@]}" -b "$work/cookies" "$admin_url" \
     >"$work/dashboard-after-restart.html"
 grep -Eq 'Dashboard|wp-admin-bar' "$work/dashboard-after-restart.html"
-curl "${curl_args[@]}" "$base/?p=$post_id" >"$work/post-after-restart.html"
+curl "${curl_args[@]}" "$post_url" >"$work/post-after-restart.html"
 grep -Fq 'qa-wordpress-persistence' "$work/post-after-restart.html"
 turnkey-wp post delete "$post_id" --force >/dev/null
 
