@@ -7,6 +7,7 @@ libjs-prototype     /* wordpress dep */
 libjs-scriptaculous /* wordpress dep */
 libphp-phpmailer    /* wordpress dep */
 php-gd              /* wordpress dep */
+php-xml             /* dashboard feeds and XML parsing */
 php-zip             /* wordpress recommends */
 php-imagick         /* wordpress recommends */
 w3m                 /* wordpress recommends */
