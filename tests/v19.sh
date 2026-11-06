@@ -12,6 +12,10 @@ mkdir -p "$work"
 systemctl --quiet is-active apache2.service mariadb.service multi-user.target
 grep -q '\[40wordpress\] successfully completed' /var/log/inithooks.log
 
+# Parse a deterministic feed through the same bundled library used by the
+# dashboard. A successful login does not establish that XML support is present.
+turnkey-wp eval-file "$(dirname "$0")/rss.php"
+
 # Exercise validation through the real firstboot hook and restore the expected URL.
 if "$hook" --pass="$password" --email=admin@example.com \
         --domain=ftp://localhost; then
@@ -123,7 +127,7 @@ done
 cat >"$result" <<EOF
 package_source=official WordPress 7.1 archive pinned by SHA-256
 installed_version=$before
-runtime_checks=firstboot, domain validation, administrator authentication, permalink settings and public/REST routes, custom rewrite comment preservation, post persistence and authenticated session across restart, updater metadata, core checksums, ownership boundaries, and secret log hygiene
+runtime_checks=firstboot, domain validation, administrator authentication, installed RSS parser, permalink settings and public/REST routes, custom rewrite comment preservation, post persistence and authenticated session across restart, updater metadata, core checksums, ownership boundaries, and secret log hygiene
 updater_command=turnkey-wp core check-update --format=json; turnkey-wordpress-update as root
 updater_result=valid update JSON, installed version unchanged, and non-root updater use fails closed
 updater_channel=official WordPress stable release channel
