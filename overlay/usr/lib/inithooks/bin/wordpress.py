@@ -19,6 +19,7 @@ from mysqlconf import MySQL
 
 
 DEFAULT_DOMAIN = 'http://www.example.com'
+DEFAULT_EMAIL = 'admin@example.com'
 
 
 def usage(s: Optional[str] | getopt.GetoptError = None) -> NoReturn:
@@ -67,8 +68,9 @@ def main():
     if not email:
         email = d.get_email(
             "Wordpress Email",
-            "Please enter email address for the Wordpress 'admin' account.",
-            "admin@example.com")
+            "Enter the WordPress administrator email. New sites also use it "
+            "for site notifications.",
+            DEFAULT_EMAIL)
 
     inithooks_cache.write('APP_EMAIL', email)
 
@@ -107,6 +109,9 @@ def main():
     m = MySQL()
     m.execute('UPDATE wordpress.wp_users SET user_pass=%s WHERE user_nicename="admin";', (hashpass,))
     m.execute('UPDATE wordpress.wp_users SET user_email=%s WHERE user_nicename="admin";', (email,))
+    m.execute('UPDATE wordpress.wp_options SET option_value=%s '
+              'WHERE option_name="admin_email" AND option_value=%s;',
+              (email, DEFAULT_EMAIL))
 
 
 if __name__ == "__main__":

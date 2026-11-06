@@ -73,6 +73,10 @@ Credentials *(passwords set at first boot)*
 -  Adminer: username **adminer**
 -  Wordpress: username **admin**
 
+The firstboot email also replaces the factory site administration address used
+for notifications. Rerunning initialization preserves a customized site address;
+change it through Settings > General when needed.
+
 Repair permalink configuration on an existing installation
 ---------------------------------------------------------
 

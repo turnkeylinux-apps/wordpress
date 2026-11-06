@@ -29,6 +29,9 @@ test "$(turnkey-wp option get siteurl)" = http://localhost
 "$hook" --pass="$password" --email=admin@example.com --domain=https://localhost
 test "$(turnkey-wp option get siteurl)" = https://localhost
 
+# Use a distinct initial email and retain a later customized site destination.
+python3 "$(dirname "$0")/firstboot-email.py"
+
 # Authenticate as the provisioned administrator.
 login_url=$base/wp-login.php
 admin_url=$base/wp-admin/
@@ -127,7 +130,7 @@ done
 cat >"$result" <<EOF
 package_source=official WordPress 7.1 archive pinned by SHA-256
 installed_version=$before
-runtime_checks=firstboot, domain validation, administrator authentication, installed RSS parser, permalink settings and public/REST routes, custom rewrite comment preservation, post persistence and authenticated session across restart, updater metadata, core checksums, ownership boundaries, and secret log hygiene
+runtime_checks=firstboot, domain validation, initial site email and custom email preservation, administrator authentication, installed RSS parser, permalink settings and public/REST routes, custom rewrite comment preservation, post persistence and authenticated session across restart, updater metadata, core checksums, ownership boundaries, and secret log hygiene
 updater_command=turnkey-wp core check-update --format=json; turnkey-wordpress-update as root
 updater_result=valid update JSON, installed version unchanged, and non-root updater use fails closed
 updater_channel=official WordPress stable release channel
